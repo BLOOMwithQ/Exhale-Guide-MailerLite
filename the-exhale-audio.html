@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>The EXHALE · In Your Ears — Nightly Audio Scripts | BLOOM with Quadia</title>
+<meta name="description" content="Seven nightly guided-reflection scripts for The EXHALE, engineered for recording in ElevenLabs. A calm bedtime companion that segues into Rest Well, Sis." />
+<meta name="theme-color" content="#F8EFE7" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;0,6..96,700;1,6..96,400;1,6..96,500;1,6..96,600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Hanken+Grotesk:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+<style>
+  :root{
+    --ivory:#F8EFE7; --ivory-2:#FBF4EC; --paper:#FFF8EF;
+    --oxblood:#A62A5E; --oxblood-2:#7E1F48; --noir:#2A1228; --noir-2:#160718;
+    --rose:#C84F77; --rose-2:#E37D9B; --blush:#ECB3C8; --cream-2:#F4DBE5;
+    --ink:#2B0E24; --ink-body:#3A2335; --ink-mute:#5A4452;
+    --line:rgba(43,14,36,0.16); --line-soft:rgba(43,14,36,0.10);
+    --shadow:0 38px 80px -44px rgba(22,7,24,0.5);
+    --shadow-s:0 18px 44px -28px rgba(22,7,24,0.42);
+    --mono:ui-monospace,"SFMono-Regular",Menlo,"Roboto Mono",monospace;
+    --serif:"Bodoni Moda",Georgia,serif;
+    --sans:"Hanken Grotesk",system-ui,sans-serif;
+    --quote:"Cormorant Garamond",Georgia,serif;
+    --ease:cubic-bezier(0.22,0.61,0.27,1);
+  }
+  *,*::before,*::after{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; -webkit-text-size-adjust:100%; }
+  body{ margin:0; background:var(--ivory); color:var(--ink-body);
+    font-family:var(--sans); font-weight:400; font-size:1.05rem; line-height:1.75;
+    letter-spacing:-0.006em; -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+    overflow-x:hidden; }
+  ::selection{ background:rgba(200,79,119,0.24); color:var(--ink); }
+
+  .wrap{ max-width:820px; margin:0 auto; padding:0 1.6rem; }
+
+  /* masthead */
+  .masthead{ background:var(--noir); color:var(--blush); text-align:center; }
+  .masthead .mh{ font-family:var(--mono); font-size:.64rem; letter-spacing:.28em;
+    text-transform:uppercase; padding:.62rem 1rem; }
+  .masthead .mh .sep{ color:var(--rose); padding:0 .55em; }
+  .masthead .mh b{ color:var(--paper); font-weight:600; }
+
+  /* hero */
+  .hero{ text-align:center; padding:clamp(3.4rem,8vw,5.6rem) 0 clamp(2.4rem,5vw,3.2rem); }
+  .brandmark{ font-family:var(--serif); font-weight:600; font-size:1.24rem; letter-spacing:.02em;
+    color:var(--ink); margin-bottom:1.8rem; }
+  .brandmark .the{ font-style:italic; font-weight:500; font-size:.8em; color:var(--oxblood); margin-right:.24em; }
+  .eyebrow{ font-family:var(--mono); font-size:.66rem; letter-spacing:.32em; text-transform:uppercase;
+    color:var(--oxblood); margin-bottom:1.5rem; }
+  .hero h1{ font-family:var(--serif); font-weight:500; font-size:clamp(2.5rem,7vw,4rem);
+    line-height:1.04; letter-spacing:-0.01em; color:var(--ink); margin:0 0 1.2rem; }
+  .hero h1 em{ font-style:italic; color:var(--oxblood); }
+  .hero .dek{ font-family:var(--quote); font-size:clamp(1.2rem,3vw,1.5rem); font-style:italic;
+    color:var(--ink-mute); max-width:30ch; margin:0 auto; line-height:1.5; }
+  .rule{ width:44px; height:1px; background:var(--rose); margin:2rem auto; }
+
+  /* section shell */
+  section{ padding:clamp(2rem,5vw,3rem) 0; }
+  .sec-label{ font-family:var(--mono); font-size:.64rem; letter-spacing:.28em; text-transform:uppercase;
+    color:var(--oxblood); display:flex; align-items:center; gap:.9rem; margin:0 0 1.4rem; font-weight:500; }
+  .sec-label::after{ content:""; flex:1; height:1px; background:linear-gradient(90deg,var(--line),transparent); }
+
+  /* studio-notes card */
+  .card{ background:var(--paper); border:1px solid var(--line-soft); border-radius:16px;
+    padding:clamp(1.6rem,4vw,2.4rem); box-shadow:var(--shadow-s); }
+  .card h3{ font-family:var(--serif); font-weight:500; font-size:1.5rem; color:var(--ink);
+    margin:0 0 1rem; letter-spacing:-0.01em; }
+  .card p{ margin:0 0 1rem; }
+  .card p:last-child{ margin-bottom:0; }
+  .card strong{ color:var(--ink); font-weight:600; }
+
+  .settings{ display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:1px;
+    background:var(--line-soft); border:1px solid var(--line-soft); border-radius:12px; overflow:hidden;
+    margin:1.4rem 0; }
+  .settings > div{ background:var(--paper); padding:1rem 1.1rem; }
+  .settings .k{ font-family:var(--mono); font-size:.58rem; letter-spacing:.2em; text-transform:uppercase;
+    color:var(--ink-mute); margin-bottom:.35rem; }
+  .settings .v{ font-family:var(--serif); font-size:1.5rem; color:var(--oxblood); line-height:1; }
+  .settings .v small{ font-family:var(--sans); font-size:.72rem; color:var(--ink-mute); letter-spacing:0; }
+
+  .cues{ list-style:none; margin:1.2rem 0 0; padding:0; }
+  .cues li{ position:relative; padding:.55rem 0 .55rem 2.6rem; border-top:1px solid var(--line-soft);
+    font-size:.98rem; }
+  .cues li:first-child{ border-top:none; }
+  .cues code{ position:absolute; left:0; top:.52rem; font-family:var(--mono); font-size:.72rem;
+    color:var(--rose); background:var(--cream-2); padding:.18rem .5rem; border-radius:6px; letter-spacing:.02em; }
+
+  /* nightly track */
+  .track{ margin-top:clamp(2.6rem,6vw,3.8rem); }
+  .track-head{ display:flex; align-items:baseline; justify-content:space-between; gap:1rem;
+    flex-wrap:wrap; border-bottom:1px solid var(--line); padding-bottom:1rem; margin-bottom:1.4rem; }
+  .track-num{ font-family:var(--mono); font-size:.64rem; letter-spacing:.26em; text-transform:uppercase;
+    color:var(--oxblood); }
+  .track-title{ font-family:var(--serif); font-weight:500; font-size:clamp(1.9rem,5vw,2.6rem);
+    color:var(--ink); margin:.3rem 0 0; letter-spacing:-0.01em; line-height:1.05; }
+  .track-title em{ font-style:italic; color:var(--oxblood); }
+  .track-meta{ font-family:var(--mono); font-size:.6rem; letter-spacing:.16em; text-transform:uppercase;
+    color:var(--ink-mute); text-align:right; line-height:2; flex:none; }
+  .track-meta b{ color:var(--ink); font-weight:600; }
+
+  .direction{ background:var(--cream-2); border-left:2px solid var(--rose); border-radius:0 10px 10px 0;
+    padding:1rem 1.3rem; margin-bottom:1.5rem; font-size:.94rem; line-height:1.65; }
+  .direction .dl{ font-family:var(--mono); font-size:.56rem; letter-spacing:.24em; text-transform:uppercase;
+    color:var(--oxblood); display:block; margin-bottom:.4rem; }
+  .direction em{ color:var(--ink); font-style:italic; }
+
+  /* the script block */
+  .script{ position:relative; background:var(--paper); border:1px solid var(--line-soft);
+    border-radius:14px; padding:clamp(1.5rem,4vw,2.2rem); box-shadow:var(--shadow-s); }
+  .script .copy{ position:absolute; top:1rem; right:1rem; font-family:var(--mono); font-size:.56rem;
+    letter-spacing:.18em; text-transform:uppercase; color:var(--ink-mute); background:var(--ivory-2);
+    border:1px solid var(--line-soft); border-radius:100px; padding:.42rem .8rem; cursor:pointer;
+    transition:all .2s var(--ease); }
+  .script .copy:hover{ color:var(--paper); background:var(--oxblood); border-color:var(--oxblood); }
+  .script .copy.done{ color:var(--paper); background:var(--rose); border-color:var(--rose); }
+  .script-body{ font-size:1.12rem; line-height:1.95; color:var(--ink-body); }
+  .script-body p{ margin:0 0 1.1rem; }
+  .script-body p:last-child{ margin-bottom:0; }
+  .script-body .brk{ display:block; font-family:var(--mono); font-size:.72rem; color:var(--rose);
+    letter-spacing:.04em; margin:.3rem 0; opacity:.85; }
+  .script-body .exhale{ font-family:var(--quote); font-style:italic; font-size:1.5rem; line-height:1.4;
+    color:var(--oxblood); margin:1.4rem 0 .4rem; }
+
+  .segue{ margin-top:1.3rem; padding-top:1.3rem; border-top:1px dashed var(--line);
+    font-size:.92rem; color:var(--ink-mute); font-style:italic; font-family:var(--quote);
+    font-size:1.15rem; line-height:1.5; }
+  .segue b{ font-family:var(--sans); font-style:normal; font-weight:600; font-size:.72rem;
+    letter-spacing:.2em; text-transform:uppercase; color:var(--oxblood); display:block; margin-bottom:.4rem; }
+
+  /* bridge / rest well sis */
+  .bridge{ background:var(--noir); color:var(--paper); border-radius:20px;
+    padding:clamp(2rem,5vw,3.2rem); margin-top:clamp(2.6rem,6vw,3.8rem); text-align:center; }
+  .bridge .track-num{ color:var(--rose-2); }
+  .bridge h3{ font-family:var(--serif); font-weight:500; font-size:clamp(2rem,5vw,2.8rem);
+    color:var(--paper); margin:.4rem 0 1rem; }
+  .bridge h3 em{ font-style:italic; color:var(--rose-2); }
+  .bridge .bridge-script{ background:rgba(255,248,239,0.05); border:1px solid rgba(236,179,200,0.2);
+    border-radius:14px; padding:clamp(1.4rem,4vw,2rem); text-align:left; margin-top:1.6rem;
+    position:relative; }
+  .bridge .bridge-script .copy{ position:absolute; top:1rem; right:1rem; font-family:var(--mono);
+    font-size:.56rem; letter-spacing:.18em; text-transform:uppercase; color:var(--blush);
+    background:rgba(255,248,239,0.06); border:1px solid rgba(236,179,200,0.25); border-radius:100px;
+    padding:.42rem .8rem; cursor:pointer; transition:all .2s var(--ease); }
+  .bridge .bridge-script .copy:hover,.bridge .bridge-script .copy.done{ color:var(--noir); background:var(--rose-2); }
+  .bridge .script-body{ color:var(--cream-2); }
+  .bridge .script-body .brk{ color:var(--rose-2); }
+  .bridge .script-body .exhale{ color:var(--rose-2); }
+
+  /* landing copy block */
+  .landing{ background:var(--cream-2); border:1px solid rgba(43,14,36,0.1); border-radius:18px;
+    padding:clamp(1.8rem,5vw,2.8rem); margin-top:clamp(2.6rem,6vw,3.8rem); position:relative; }
+  .landing .copy{ position:absolute; top:1.1rem; right:1.1rem; font-family:var(--mono); font-size:.56rem;
+    letter-spacing:.18em; text-transform:uppercase; color:var(--ink-mute); background:var(--paper);
+    border:1px solid var(--line-soft); border-radius:100px; padding:.42rem .8rem; cursor:pointer;
+    transition:all .2s var(--ease); }
+  .landing .copy:hover,.landing .copy.done{ color:var(--paper); background:var(--oxblood); border-color:var(--oxblood); }
+  .landing h3{ font-family:var(--serif); font-weight:500; font-size:clamp(1.7rem,4.5vw,2.3rem);
+    color:var(--ink); margin:.4rem 0 1.1rem; line-height:1.1; }
+  .landing h3 em{ font-style:italic; color:var(--oxblood); }
+  .landing p{ margin:0 0 1rem; color:var(--ink-body); }
+  .landing p:last-child{ margin-bottom:0; }
+
+  footer{ text-align:center; padding:clamp(3rem,7vw,4.5rem) 0 clamp(2.4rem,5vw,3.2rem); }
+  footer .fmark{ font-family:var(--serif); font-weight:600; font-size:1.1rem; color:var(--ink);
+    letter-spacing:.02em; }
+  footer .fmark .the{ font-style:italic; font-weight:500; color:var(--oxblood); margin-right:.2em; }
+  footer .fnote{ font-family:var(--mono); font-size:.58rem; letter-spacing:.22em; text-transform:uppercase;
+    color:var(--ink-mute); margin-top:1rem; }
+
+  @media (max-width:560px){
+    .track-meta{ text-align:left; }
+    .track-head{ gap:.4rem; }
+  }
+  @media print{
+    body{ background:#fff; }
+    .masthead,.script .copy,.bridge .bridge-script .copy,.landing .copy{ display:none; }
+    .script,.card,.bridge,.landing{ box-shadow:none; break-inside:avoid; }
+    .track{ break-inside:avoid; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="masthead"><div class="mh">The <b>EXHALE</b> <span class="sep">·</span> In Your Ears <span class="sep">·</span> <b>Recording Scripts</b></div></div>
+
+  <div class="wrap">
+
+    <!-- HERO -->
+    <header class="hero">
+      <div class="brandmark"><span class="the">BLOOM with</span>Quadia</div>
+      <div class="eyebrow">The Nightly Audio Companion</div>
+      <h1>The EXHALE,<br /><em>in your ears.</em></h1>
+      <div class="rule"></div>
+      <p class="dek">Seven short reflections to close the day &mdash; read slow, recorded once, hers forever.</p>
+    </header>
+
+    <!-- HOW TO USE / STUDIO NOTES -->
+    <section id="notes">
+      <div class="sec-label">Before you record</div>
+      <div class="card">
+        <h3>How this was built &mdash; and how to voice it</h3>
+        <p>These are <strong>seven nightly tracks</strong>, one per day of The EXHALE. Each is written to be spoken at the end of the day, in the dark, at roughly <strong>110 words a minute</strong> &mdash; unhurried, close to the microphone, like you are the last calm voice she hears before sleep. Every night opens differently on purpose, so it never feels like a template repeating; the arc moves from noticing the body to finally letting it rest.</p>
+        <p>Record them in one sitting while your voice is warm. The pacing marks below are written the way ElevenLabs reads them &mdash; leave them in the text field exactly as shown.</p>
+
+        <div class="settings">
+          <div><div class="k">Voice</div><div class="v">Warm<small> · low, close, unhurried</small></div></div>
+          <div><div class="k">Stability</div><div class="v">55<small>%</small></div></div>
+          <div><div class="k">Similarity</div><div class="v">75<small>%</small></div></div>
+          <div><div class="k">Style</div><div class="v">Low<small> · keep it human</small></div></div>
+        </div>
+
+        <ul class="cues">
+          <li><code>&lt;break time="1.5s" /&gt;</code> A held silence. ElevenLabs honors these literally &mdash; keep them where the breath should land.</li>
+          <li><code>&hellip;</code> An ellipsis buys a natural half-beat. Read straight through it, softly.</li>
+          <li><code>line breaks</code> Each new line resets your pace. Do not rush to fill them.</li>
+          <li><code>italic lines</code> The EXHALE affirmation &mdash; drop your voice, slow to half speed, mean it.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- TRACKS -->
+    <section id="tracks">
+      <div class="sec-label">The Seven Nights</div>
+
+      <!-- INTRO / NIGHT ZERO -->
+      <article class="track">
+        <div class="track-head">
+          <div><div class="track-num">Before Night One</div><h2 class="track-title">The <em>Welcome</em></h2></div>
+          <div class="track-meta"><b>~1:30</b><br />Track 00</div>
+        </div>
+        <div class="direction"><span class="dl">Direction</span>The first voice she hears. <em>Unhurried and intimate</em> &mdash; you are meeting her, not performing for her. Smile on the opening line; she should hear it.</div>
+        <div class="script">
+          <button class="copy" type="button">Copy</button>
+          <div class="script-body">
+            <p>Hi, sis.<span class="brk">&lt;break time="1s" /&gt;</span> I am so glad you are here.</p>
+            <p>If you are listening to this, some part of you already knows the truth &mdash; that you have been carrying more than anyone has ever thanked you for. That you have been the strong one for so long you forgot you were allowed to be soft.<span class="brk">&lt;break time="1.5s" /&gt;</span></p>
+            <p>So here is what the next seven nights are, and what they are not.</p>
+            <p>They are not a program. There is nothing to complete, nothing to get right, no one grading you. This is simply a few quiet minutes at the end of each day &mdash; my voice, and permission to put the whole thing down.<span class="brk">&lt;break time="1.5s" /&gt;</span></p>
+            <p>One reflection a night. That is all. Listen in bed, in the bath, in the car after everyone has gone quiet. You do not even have to keep your eyes open.<span class="brk">&lt;break time="1.5s" /&gt;</span></p>
+            <p>We will begin gently &mdash; with breath. And by the seventh night, something in you will have shifted. Not because you worked at it. Because you finally stopped.</p>
+            <p>So take one slow breath in with me now&hellip; and let it go.<span class="brk">&lt;break time="2s" /&gt;</span></p>
+            <p class="exhale">Welcome to the exhale, sis. Let's begin.</p>
+          </div>
+          <div class="segue"><b>Softly, to close</b>When you are ready&hellip; press play on Night One.</div>
+        </div>
+      </article>
+
+      <!-- NIGHT 1 -->
+      <article class="track">
+        <div class="track-head">
+          <div><div class="track-num">Night One</div><h2 class="track-title">Breathe</h2></div>
+          <div class="track-meta"><b>~2:00</b><br />Track 01</div>
+        </div>
+        <div class="direction"><span class="dl">Direction</span>Arrival. She has just put the day down. <em>Slow the very first line almost to a whisper</em> &mdash; you are lowering the lights with your voice.</div>
+        <div class="script">
+          <button class="copy" type="button">Copy</button>
+          <div class="script-body">
+            <p>Wherever you are right now &mdash; you can stop.<span class="brk">&lt;break time="1.5s" /&gt;</span></p>
+            <p>The list is not going anywhere. The people you love are safe. For the next two minutes, there is nothing to fix and no one to carry.</p>
+            <p>Take one slow breath in&hellip; and a slower breath out.<span class="brk">&lt;break time="2s" /&gt;</span></p>
+            <p>All day you have been proving you are alive by how much you did. Tonight, notice you are alive by how it feels to simply be here.</p>
+            <p>Ask, gently &mdash; not <em>what did I accomplish today,</em> but&hellip; how was I alive today?<span class="brk">&lt;break time="1.5s" /&gt;</span></p>
+            <p>You do not have to answer well. You only have to ask.</p>
+            <p class="exhale">&ldquo;I refuse to confuse survival with living. Tonight, I choose to be fully alive.&rdquo;</p>
+          </div>
+          <div class="segue"><b>Softly, to close</b>Rest now, sis. I will be here again tomorrow.</div>
+        </div>
+      </article>
+
+      <!-- NIGHT 2 -->
+      <article class="track">
+        <div class="track-head">
+          <div><div class="track-num">Night Two</div><h2 class="track-title">Rest</h2></div>
+          <div class="track-meta"><b>~2:10</b><br />Track 02</div>
+        </div>
+        <div class="direction"><span class="dl">Direction</span>Permission. She feels guilty for stopping. <em>Warm and certain</em> &mdash; you are giving her something she has been waiting to be told.</div>
+        <div class="script">
+          <button class="copy" type="button">Copy</button>
+          <div class="script-body">
+            <p>Let me tell you something no one told you.<span class="brk">&lt;break time="1s" /&gt;</span> You are allowed to be tired.</p>
+            <p>Not because you failed. Because you have been the well the whole village drinks from &mdash; and no one thought to ask who was refilling you.<span class="brk">&lt;break time="1.5s" /&gt;</span></p>
+            <p>Somewhere you learned that your exhaustion was proof of your goodness. Tonight we set that down.</p>
+            <p>Resting is not withdrawing from the people who need you. It is protecting the source they need.<span class="brk">&lt;break time="1.5s" /&gt;</span></p>
+            <p>So breathe out the thing you have been postponing until you are &ldquo;less busy.&rdquo; It will keep. You matter more.</p>
+            <p class="exhale">&ldquo;I am not abandoning my responsibilities. I am restoring the source from which I meet them.&rdquo;</p>
+          </div>
+          <div class="segue"><b>Softly, to close</b>Close your eyes, sis. Nothing tonight requires you.</div>
+        </div>
+      </article>
+
+      <!-- NIGHT 3 -->
+      <article class="track">
+        <div class="track-head">
+          <div><div class="track-num">Night Three</div><h2 class="track-title">Trust</h2></div>
+          <div class="track-meta"><b>~2:10</b><br />Track 03</div>
+        </div>
+        <div class="direction"><span class="dl">Direction</span>Release. Her mind is still managing everyone. <em>Steady, grounding</em> &mdash; help her set weight down, one thing at a time.</div>
+        <div class="script">
+          <button class="copy" type="button">Copy</button>
+          <div class="script-body">
+            <p>Before you sleep, let us put some things down that were never yours to hold.<span class="brk">&lt;break time="1.5s" /&gt;</span></p>
+            <p>You have carried other people's moods. Other people's choices. Outcomes you were never in charge of. And you called it love.</p>
+            <p>But watching everything so closely is not love. It is fear wearing love's coat.<span class="brk">&lt;break time="1.5s" /&gt;</span></p>
+            <p>What is actually yours? Your integrity. Your peace. Your becoming. That is the list. Everything else, you can loosen your grip on tonight.</p>
+            <p>Picture your hands opening in the dark.<span class="brk">&lt;break time="1.5s" /&gt;</span> Whatever was never yours &mdash; let it go where it belongs.</p>
+            <p class="exhale">&ldquo;I release what was never mine, so I can faithfully care for what is.&rdquo;</p>
+          </div>
+          <div class="segue"><b>Softly, to close</b>Your hands are empty now, sis. Sleep with them open.</div>
+        </div>
+      </article>
+
+      <!-- NIGHT 4 -->
+      <article class="track">
+        <div class="track-head">
+          <div><div class="track-num">Night Four</div><h2 class="track-title">Receive</h2></div>
+          <div class="track-meta"><b>~2:00</b><br />Track 04</div>
+        </div>
+        <div class="direction"><span class="dl">Direction</span>Softening. She is better at giving than taking. <em>Tender, almost coaxing</em> &mdash; you are teaching her hands to open upward.</div>
+        <div class="script">
+          <button class="copy" type="button">Copy</button>
+          <div class="script-body">
+            <p>You are so good at giving.<span class="brk">&lt;break time="1s" /&gt;</span> Tonight, I want to teach you the harder thing. Receiving.</p>
+            <p>Somewhere you decided everyone else's needs deserved a faster answer than your own. That the help, the rest, the tenderness &mdash; those were for other people.<span class="brk">&lt;break time="1.5s" /&gt;</span></p>
+            <p>What have you been turning down because it felt undeserved?</p>
+            <p>Hear this clearly: you do not have to earn care. A field does not earn the rain.<span class="brk">&lt;break time="1.5s" /&gt;</span></p>
+            <p>Let tonight's rest be the first thing you receive without apology. You cannot pour from a cup you refuse to let anyone fill.</p>
+            <p class="exhale">&ldquo;I receive without apology, so that I may give without depletion.&rdquo;</p>
+          </div>
+          <div class="segue"><b>Softly, to close</b>Let it be given to you tonight, sis. Just this once, take it.</div>
+        </div>
+      </article>
+
+      <!-- NIGHT 5 -->
+      <article class="track">
+        <div class="track-head">
+          <div><div class="track-num">Night Five</div><h2 class="track-title">Beauty</h2></div>
+          <div class="track-meta"><b>~2:00</b><br />Track 05</div>
+        </div>
+        <div class="direction"><span class="dl">Direction</span>Noticing. Quieter, more spacious. <em>Let the images breathe</em> &mdash; the peony, the ocean, the sunrise. Do not rush the pictures.</div>
+        <div class="script">
+          <button class="copy" type="button">Copy</button>
+          <div class="script-body">
+            <p>No one applauds the peony when it opens.<span class="brk">&lt;break time="1.5s" /&gt;</span> The ocean does not wait for a crowd before it catches the light.</p>
+            <p>Beauty was never a reward for finishing everything else. It is not the prize at the end of the to-do list. It is oxygen.<span class="brk">&lt;break time="1.5s" /&gt;</span></p>
+            <p>Somewhere you began treating it as optional &mdash; the candle, the good sheets, the flowers only bought when someone was watching.</p>
+            <p>Ask this as you drift: if my home and my body were given the same care I give everyone else&hellip; what would soften first?<span class="brk">&lt;break time="2s" /&gt;</span></p>
+            <p>You do not cultivate beauty because life got easier. You cultivate it because you are alive.</p>
+            <p class="exhale">&ldquo;I refuse to postpone beauty until life is easier. I make beauty because I am alive.&rdquo;</p>
+          </div>
+          <div class="segue"><b>Softly, to close</b>Let the room be lovely while you sleep in it, sis.</div>
+        </div>
+      </article>
+
+      <!-- NIGHT 6 -->
+      <article class="track">
+        <div class="track-head">
+          <div><div class="track-num">Night Six</div><h2 class="track-title">Bloom</h2></div>
+          <div class="track-meta"><b>~2:10</b><br />Track 06</div>
+        </div>
+        <div class="direction"><span class="dl">Direction</span>Becoming. The emotional peak &mdash; still quiet, but full. <em>A little more voice here.</em> This is the night she stops asking permission.</div>
+        <div class="script">
+          <button class="copy" type="button">Copy</button>
+          <div class="script-body">
+            <p>The rose never asks permission to open.<span class="brk">&lt;break time="1.5s" /&gt;</span> It does not wait to be sure it is wanted. It simply becomes what it already is.</p>
+            <p>Where in your life have you been asking for a permission that was never actually required?<span class="brk">&lt;break time="1.5s" /&gt;</span></p>
+            <p>What version of you have you postponed &mdash; kept folded up and quiet &mdash; for someone else's comfort?</p>
+            <p>Tonight you stop negotiating with your own becoming. You do not have to be perfect to begin. You only have to be alive.<span class="brk">&lt;break time="1.5s" /&gt;</span></p>
+            <p>You have spent so long being the rock. Sleep tonight as the rose.</p>
+            <p class="exhale">&ldquo;I no longer negotiate with my own becoming. I choose to bloom &mdash; not when I am perfect, but because I am alive.&rdquo;</p>
+          </div>
+          <div class="segue"><b>Softly, to close</b>You are already blooming, sis. Rest inside it.</div>
+        </div>
+      </article>
+
+      <!-- NIGHT 7 -->
+      <article class="track">
+        <div class="track-head">
+          <div><div class="track-num">Night Seven</div><h2 class="track-title">The <em>Declaration</em></h2></div>
+          <div class="track-meta"><b>~2:20</b><br />Track 07</div>
+        </div>
+        <div class="direction"><span class="dl">Direction</span>The keepsake. Warm, close, a little ceremonial. This night gathers all six &mdash; and opens the door to what comes next. <em>End almost in a whisper.</em></div>
+        <div class="script">
+          <button class="copy" type="button">Copy</button>
+          <div class="script-body">
+            <p>Seven nights ago you were still the rock.<span class="brk">&lt;break time="1.5s" /&gt;</span> Tonight, listen to how far you have come.</p>
+            <p>You remembered how to breathe. You let yourself rest. You set down what was never yours. You learned to receive. You made room for beauty. And you began to bloom.<span class="brk">&lt;break time="2s" /&gt;</span></p>
+            <p>None of that was a project. It was a returning &mdash; to the woman who was here all along, underneath everyone's needs.</p>
+            <p>This is your declaration, and you get to keep it:<span class="brk">&lt;break time="1s" /&gt;</span></p>
+            <p class="exhale">&ldquo;I belong to myself before I belong to the world. I choose to be alive. And I am allowed to rest.&rdquo;</p>
+            <p>But here is the truth about rest, sis &mdash; it is not a single week. It is a practice you come back to, night after night.<span class="brk">&lt;break time="1.5s" /&gt;</span></p>
+            <p>So I am not saying goodbye. I am saying&hellip; I will meet you here again tomorrow night.</p>
+          </div>
+          <div class="segue"><b>Softly, to close</b>Rest well, sis. This was only the beginning.</div>
+        </div>
+      </article>
+
+      <!-- BRIDGE: REST WELL, SIS -->
+      <article class="bridge">
+        <div class="track-num">The Bridge &middot; Optional Outro</div>
+        <h3>&hellip;and this is where it becomes <em>Rest Well, Sis.</em></h3>
+        <p style="color:var(--cream-2); max-width:46ch; margin:0 auto; font-size:1rem;">Record this once and append it to Night Seven &mdash; or keep it aside as the opening of your nightly series. It turns a seven-day guide into a ritual she never has to leave.</p>
+        <div class="bridge-script">
+          <button class="copy" type="button">Copy</button>
+          <div class="script-body">
+            <p>If these seven nights gave you something &mdash; do not let them end here.<span class="brk">&lt;break time="1.5s" /&gt;</span></p>
+            <p>The exhale was never meant to be a one-week event. It is a place to come home to.</p>
+            <p>Every night this can be yours: a few quiet minutes, my voice, and permission to put the whole day down.<span class="brk">&lt;break time="1.5s" /&gt;</span></p>
+            <p>It is called <em>Rest Well, Sis.</em> And it is simply this &mdash; the last calm voice you hear before sleep, waiting for you whenever you need it.</p>
+            <p>So for tonight&hellip; nothing more is required of you.</p>
+            <p class="exhale">Rest well, sis. I will be right here.</p>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <!-- LANDING PAGE COPY BLOCK -->
+    <section id="landing">
+      <div class="sec-label">For the landing page &middot; Founding-member add-on</div>
+      <div class="landing">
+        <button class="copy" type="button">Copy</button>
+        <div class="eyebrow" style="margin-bottom:.6rem;">Drop this into the offer section</div>
+        <h3>The EXHALE, <em>in your ears.</em></h3>
+        <p>Join as a founding member and your reflections arrive with something extra: short guided audio, bonus meditations, and the reflection questions that help you finally stop being last on your own list.</p>
+        <p>Listen on the school run, in the bath, on a walk. Ten minutes, hands free, no screen required.</p>
+      </div>
+    </section>
+
+    <footer>
+      <div class="fmark"><span class="the">The</span>EXHALE</div>
+      <div class="fnote">BLOOM with Quadia &middot; Nightly Audio Scripts &middot; For ElevenLabs</div>
+    </footer>
+
+  </div>
+
+<script>
+  document.querySelectorAll('.copy').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var block = btn.closest('.script, .bridge-script, .landing');
+      var body = block.querySelector('.script-body') || block;
+      // Build plain-text version: keep break tags + affirmations, drop the button text.
+      var lines = [];
+      body.querySelectorAll('p').forEach(function(p){
+        // convert <span class="brk"> content into its own line
+        var clone = p.cloneNode(true);
+        var brk = clone.querySelector('.brk');
+        var tail = '';
+        if(brk){ tail = '\n' + brk.textContent.trim(); brk.remove(); }
+        var t = clone.textContent.replace(/\s+/g,' ').trim();
+        if(t) lines.push(t + (tail ? tail : ''));
+        else if(tail) lines.push(tail.trim());
+      });
+      var text = lines.join('\n\n');
+      navigator.clipboard.writeText(text).then(function(){
+        var orig = btn.textContent;
+        btn.textContent = 'Copied ✓';
+        btn.classList.add('done');
+        setTimeout(function(){ btn.textContent = orig; btn.classList.remove('done'); }, 1600);
+      });
+    });
+  });
+</script>
+</body>
+</html>
