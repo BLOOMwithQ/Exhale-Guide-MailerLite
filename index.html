@@ -8,8 +8,29 @@
 
 <meta name="theme-color" content="#F8EFE7" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-title" content="The EXHALE" />
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+
+<!-- ============ SOCIAL SHARE (Open Graph / Twitter) ============ -->
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="BLOOM with Quadia" />
+<meta property="og:title" content="The EXHALE · A private 7-day reset" />
+<meta property="og:description" content="A private, 7-day guided reflection for women deciding to stop being the rock and become the rose." />
+<meta property="og:image" content="og-image.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:url" content="https://www.bloomwithquadia.com/" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="The EXHALE · A private 7-day reset" />
+<meta name="twitter:description" content="For women deciding to stop being the rock and become the rose." />
+<meta name="twitter:image" content="og-image.png" />
+
+<!-- ============ PWA · installable + offline ============ -->
+<link rel="manifest" href="manifest.webmanifest" />
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png" />
+<link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png" />
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -154,6 +175,7 @@
   /* ---------------- INTRO ---------------- */
   .intro{ padding-top:1rem; border-top:1px solid var(--line-soft); }
   p{ margin:0 0 1.5rem; font-weight:400; }
+  .intro > p, .day-section > p{ margin-bottom:0.7rem; }
   p.lead-paragraph{ font-family:var(--serif); font-weight:500; font-size:clamp(1.4rem,3.6vw,1.85rem);
     line-height:1.4; color:var(--ink); margin-bottom:1.8rem; letter-spacing:-0.01em; }
 
@@ -243,36 +265,6 @@
   .resolution-attributes .sig{ font-family:"Great Vibes", cursive; text-transform:none; letter-spacing:0;
     font-size:2.2rem; color:var(--oxblood); display:block; margin-top:1.4rem; }
 
-  /* ---------------- CLAIM FORM (MailerLite) ---------------- */
-  .claim{ background:var(--ivory-2); color:var(--ink-body); border-radius:20px;
-    padding:clamp(2.6rem,6vw,4rem) clamp(1.8rem,5vw,3.2rem); margin:clamp(2.2rem,5vw,3rem) 0 0;
-    text-align:center; box-shadow:var(--shadow-s); border:1px solid var(--line-soft); }
-  .claim .kicker{ font-family:var(--mono); font-size:.64rem; letter-spacing:.32em; text-transform:uppercase;
-    color:var(--oxblood); margin-bottom:1.2rem; }
-  .claim h3{ font-family:var(--serif); font-weight:500; font-size:clamp(1.9rem,5vw,2.8rem);
-    color:var(--ink); line-height:1.08; letter-spacing:.01em; margin:0 0 1rem; }
-  .claim p.claim-lead{ color:var(--ink-mute); font-size:1.05rem; line-height:1.7;
-    max-width:46ch; margin:0 auto 2rem; }
-  .claim-form{ display:flex; gap:.7rem; max-width:520px; margin:0 auto; }
-  .claim-form input{ flex:1; min-width:0; font-family:var(--sans); font-size:1rem; color:var(--ink);
-    background:var(--paper); border:1px solid var(--line); border-radius:100px; padding:1rem 1.4rem;
-    outline:none; }
-  .claim-form input:focus{ border-color:var(--rose-2); box-shadow:0 0 0 3px rgba(227,125,155,0.3); }
-  .claim-form input::placeholder{ color:var(--ink-mute); }
-  .btn-claim{ flex:none; font-family:var(--sans); font-weight:600; font-size:.82rem;
-    letter-spacing:.06em; color:var(--oxblood); background:transparent;
-    border:1px solid var(--oxblood); border-radius:100px; padding:1rem 1.7rem; cursor:pointer;
-    display:inline-flex; align-items:center; gap:.5rem; transition:background .25s var(--ease), color .25s var(--ease), transform .25s var(--ease); }
-  .btn-claim:hover{ background:var(--oxblood); color:var(--paper); transform:translateY(-1px); }
-  .btn-claim .arr{ transition:transform .25s var(--ease); }
-  .btn-claim:hover .arr{ transform:translateX(3px); }
-  .claim-note{ font-family:var(--mono); font-size:.6rem; letter-spacing:.14em; text-transform:uppercase;
-    color:var(--ink-mute); margin:1.4rem 0 0; }
-  @media(max-width:560px){
-    .claim-form{ flex-direction:column; }
-    .btn-claim{ justify-content:center; }
-  }
-
   /* ---------------- FOOTER ---------------- */
   footer.guide-foot{ text-align:center; padding:clamp(3.5rem,7vw,5rem) 1.6rem clamp(3rem,6vw,4rem); }
   footer.guide-foot .fw{ font-family:var(--serif); font-weight:600; font-size:1.15rem; letter-spacing:.02em;
@@ -289,8 +281,187 @@
 
   @media(max-width:640px){
     body{ font-size:1.08rem; line-height:1.8; }
-    .nav-brand .full{ display:none; }
+    .nav-brand{ font-size:1.04rem; }
+    .nav-brand .the{ margin-right:.2em; }
+    .nav-links{ justify-content:flex-start; }
   }
+  @media(max-width:400px){
+    .nav-container{ gap:.7rem; padding:.6rem 1rem; }
+  }
+
+  /* =====================================================================
+     PWA · progress, journaling, install, keepsake
+     ===================================================================== */
+
+  /* ---------------- INSTALL CTA (in Save-to-phone card) ---------------- */
+  .install-cta{ display:none; margin-top:1.6rem; }
+  .install-cta.show{ display:block; }
+  .btn-install{ font-family:var(--sans); font-weight:700; font-size:.72rem; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--paper); background:var(--oxblood); border:none; border-radius:8px;
+    padding:.95rem 1.6rem; cursor:pointer; display:inline-flex; align-items:center; gap:.6rem;
+    transition:background .25s var(--ease), transform .25s var(--ease); }
+  .btn-install:hover{ background:var(--oxblood-2); transform:translateY(-1px); }
+  .btn-install svg{ width:16px; height:16px; }
+
+  /* ---------------- JOURNEY TRACKER ---------------- */
+  .journey{ max-width:760px; margin:0 auto clamp(3rem,6vw,4.5rem); padding:0 1.6rem; }
+  .journey-inner{ background:#EEE2D4; border:1px solid rgba(43,14,36,0.09); border-radius:18px;
+    padding:clamp(1.5rem,4vw,2rem); }
+  .journey-head{ display:flex; align-items:baseline; justify-content:space-between; gap:1rem;
+    margin-bottom:1.5rem; }
+  .journey-head .jlabel{ font-family:var(--mono); font-size:.64rem; letter-spacing:.26em;
+    text-transform:uppercase; color:var(--oxblood); }
+  .journey-head .jcount{ font-family:var(--mono); font-size:.64rem; letter-spacing:.16em;
+    text-transform:uppercase; color:var(--ink-mute); }
+  .journey-head .jcount b{ color:var(--oxblood); font-weight:600; }
+  .journey-track{ display:grid; grid-template-columns:repeat(7,1fr); gap:.5rem; }
+  .jstep{ display:flex; flex-direction:column; align-items:center; gap:.55rem;
+    background:none; border:none; cursor:pointer; padding:.2rem 0; font-family:inherit; }
+  .jstep .dot{ width:15px; height:15px; border-radius:50%; border:1.5px solid var(--line);
+    background:var(--ivory-2); transition:all .3s var(--ease); position:relative; }
+  .jstep .dot::after{ content:""; position:absolute; inset:0; border-radius:50%;
+    background:var(--oxblood-2); transform:scale(0); transition:transform .3s var(--ease); }
+  .jstep .jname{ font-family:var(--mono); font-size:.5rem; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--ink-mute); transition:color .3s var(--ease); white-space:nowrap; }
+  .jstep.done .dot{ border-color:var(--oxblood-2); }
+  .jstep.done .dot::after{ transform:scale(.62); }
+  .jstep.current .dot{ border-color:var(--oxblood-2); box-shadow:0 0 0 4px rgba(126,31,72,0.12); }
+  .jstep.current .jname{ color:var(--oxblood); }
+  .jstep:hover .jname{ color:var(--oxblood); }
+  .journey-resume{ display:none; margin-top:1.6rem; width:100%; font-family:var(--sans); font-weight:600;
+    font-size:.82rem; letter-spacing:.04em; color:var(--oxblood-2); background:transparent;
+    border:1px solid rgba(43,14,36,0.18); border-radius:8px; padding:.85rem 1.4rem; cursor:pointer;
+    transition:background .25s var(--ease), color .25s var(--ease), border-color .25s var(--ease); }
+  .journey-resume:hover{ background:var(--oxblood-2); border-color:var(--oxblood-2); color:var(--paper); }
+  .journey-resume.show{ display:inline-flex; align-items:center; justify-content:center; gap:.5rem; }
+  @media(max-width:480px){
+    .jstep .jname{ display:none; }
+    .journey-track{ gap:.6rem; }
+    .jstep{ padding:.7rem 0; }
+    .jstep .dot{ width:20px; height:20px; }
+  }
+
+  /* ---------------- DAY COMPLETE TOGGLE ---------------- */
+  .day-complete{ display:flex; justify-content:center; margin-top:1.8rem; }
+  .btn-complete{ font-family:var(--mono); font-size:.62rem; letter-spacing:.2em; text-transform:uppercase;
+    color:var(--oxblood); background:transparent; border:1px solid var(--line); border-radius:8px;
+    padding:.7rem 1.4rem; cursor:pointer; display:inline-flex; align-items:center; gap:.6rem;
+    white-space:nowrap; transition:all .25s var(--ease); }
+  .btn-complete:hover{ border-color:var(--oxblood); }
+  .btn-complete .chk{ width:15px; height:15px; border-radius:50%; border:1.5px solid var(--oxblood-2);
+    display:inline-flex; align-items:center; justify-content:center; flex:none; }
+  .btn-complete .chk svg{ width:9px; height:9px; opacity:0; transform:scale(.4);
+    transition:all .25s var(--ease); color:var(--paper); }
+  .btn-complete.done{ color:var(--paper); background:var(--oxblood-2); border-color:var(--oxblood-2); }
+  .btn-complete.done .chk{ background:var(--paper); border-color:var(--paper); }
+  .btn-complete.done .chk svg{ opacity:1; transform:scale(1); color:var(--oxblood-2); }
+
+  /* ---------------- JOURNALING ---------------- */
+  .journal{ margin-top:1.8rem; }
+  .journal-label{ font-family:var(--mono); font-size:.62rem; letter-spacing:.22em; text-transform:uppercase;
+    color:var(--oxblood); display:flex; align-items:center; gap:.55rem; margin-bottom:.9rem; font-weight:500; }
+  .journal-label svg{ width:14px; height:14px; }
+  .journal textarea{ width:100%; min-height:112px; resize:vertical; font-family:var(--quote);
+    font-size:1.2rem; line-height:1.6; color:var(--ink); background:var(--ivory-2);
+    border:1px solid var(--line-soft); border-radius:14px; padding:1.1rem 1.2rem; outline:none;
+    transition:border-color .25s var(--ease), box-shadow .25s var(--ease); font-style:italic; }
+  .journal textarea::placeholder{ color:var(--ink-mute); font-style:italic; opacity:.7; }
+  .journal textarea:focus{ border-color:var(--rose-2); box-shadow:0 0 0 3px rgba(227,125,155,0.18);
+    background:var(--paper); }
+  .journal-note{ font-family:var(--mono); font-size:.56rem; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--ink-mute); margin:.7rem 0 0; display:flex; align-items:center; gap:.5rem; }
+  .journal-note .saved{ color:var(--rose); opacity:0; transition:opacity .3s var(--ease); }
+  .journal-note .saved.show{ opacity:1; }
+
+  /* ---------------- KEEPSAKE (sign your declaration) ---------------- */
+  .keepsake{ margin-top:3.4rem; padding-top:2.6rem; border-top:1px solid var(--line); text-align:center; }
+  .keepsake .ks-label{ font-family:var(--mono); font-size:.62rem; letter-spacing:.28em; text-transform:uppercase;
+    color:var(--oxblood); margin-bottom:1rem; }
+  .keepsake .ks-intro{ font-size:.98rem; line-height:1.7; color:var(--ink-mute); max-width:44ch;
+    margin:0 auto 1.8rem; }
+  .ks-preview-wrap{ max-width:360px; margin:0 auto; }
+  .ks-preview{ display:block; width:100%; height:auto; border-radius:8px;
+    box-shadow:0 30px 70px -34px rgba(22,7,24,0.55); border:1px solid var(--line-soft); }
+  .ks-form{ display:flex; gap:.7rem; max-width:440px; margin:1.4rem auto 0; }
+  .ks-form input{ flex:1; min-width:0; font-family:var(--sans); font-size:1rem; color:var(--ink);
+    background:var(--paper); border:1px solid var(--line); border-radius:8px; padding:.9rem 1.3rem;
+    outline:none; text-align:center; }
+  .ks-form input:focus{ border-color:var(--rose-2); box-shadow:0 0 0 3px rgba(227,125,155,0.2); }
+  .ks-save{ display:none; margin:1.6rem auto 0; }
+  .ks-save.show{ display:inline-flex; }
+  .btn-keepsake{ font-family:var(--sans); font-weight:700; font-size:.76rem; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--paper); background:var(--oxblood); border:none; border-radius:8px;
+    padding:1.05rem 1.9rem; cursor:pointer; display:inline-flex; align-items:center; gap:.5rem;
+    white-space:nowrap; transition:background .25s var(--ease), transform .25s var(--ease); }
+  .btn-keepsake:hover{ background:var(--oxblood-2); transform:translateY(-1px); }
+  .btn-keepsake svg{ width:16px; height:16px; }
+
+  /* ---------------- DAILY REMINDER ---------------- */
+  .reminder{ max-width:760px; margin:0 auto clamp(3rem,6vw,4.5rem); padding:0 1.6rem; }
+  .reminder-inner{ background:#EEE2D4; border:1px solid rgba(43,14,36,0.09); border-radius:18px;
+    padding:clamp(1.5rem,4vw,2rem);
+    display:flex; align-items:center; gap:1.6rem; flex-wrap:wrap; }
+  .reminder-copy{ flex:1 1 280px; }
+  .reminder-copy .rlabel{ font-family:var(--mono); font-size:.62rem; letter-spacing:.24em;
+    text-transform:uppercase; color:var(--oxblood); display:flex; align-items:center; gap:.55rem; margin-bottom:.7rem; }
+  .reminder-copy .rlabel svg{ width:15px; height:15px; }
+  .reminder-copy p{ margin:0; font-size:.96rem; line-height:1.65; color:var(--ink-mute); }
+  .reminder-controls{ display:flex; align-items:center; gap:.7rem; flex:none; }
+  .rtime{ font-family:var(--mono); font-size:.58rem; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--ink-mute); display:flex; flex-direction:column; gap:.4rem; }
+  .rtime input[type="time"]{ font-family:var(--sans); font-size:.95rem; color:var(--ink);
+    background:#FBF5EE; border:1px solid rgba(43,14,36,0.14); border-radius:8px; padding:.6rem .9rem;
+    outline:none; }
+  .rtime input[type="time"]:focus{ border-color:var(--oxblood); box-shadow:0 0 0 3px rgba(126,31,72,0.12); }
+  .btn-remind{ align-self:flex-end; font-family:var(--sans); font-weight:600; font-size:.8rem;
+    letter-spacing:.04em; color:var(--oxblood-2); background:transparent; border:1px solid rgba(43,14,36,0.18);
+    border-radius:8px; padding:.72rem 1.3rem; cursor:pointer; white-space:nowrap;
+    transition:background .25s var(--ease), color .25s var(--ease), border-color .25s var(--ease); }
+  .btn-remind:hover{ background:var(--oxblood-2); border-color:var(--oxblood-2); color:var(--paper); }
+  .btn-remind.on{ background:var(--oxblood-2); border-color:var(--oxblood-2); color:var(--paper); }
+  .btn-remind:disabled{ opacity:.5; cursor:not-allowed; }
+  .reminder-note{ flex:1 1 100%; font-family:var(--mono); font-size:.56rem; letter-spacing:.1em;
+    text-transform:uppercase; color:var(--ink-mute); margin:.2rem 0 0; min-height:.7rem; }
+  .reminder-note:empty{ display:none; }
+  @media(max-width:560px){
+    .reminder-controls{ width:100%; justify-content:space-between; }
+  }
+
+  /* ---------------- ROSE ERA COACHING (paid offer) ---------------- */
+  .rose-era{ background:var(--noir); color:var(--paper); border-radius:20px;
+    padding:clamp(2.6rem,6vw,4rem) clamp(1.8rem,5vw,3.2rem); margin:clamp(2.6rem,5vw,3.4rem) 0 0;
+    box-shadow:var(--shadow); position:relative; overflow:hidden; text-align:left; }
+  .rose-era::before{ content:""; position:absolute; inset:0 0 auto 0; height:4px;
+    background:linear-gradient(90deg, var(--gold), var(--rose), var(--rose-2)); }
+  .rose-era .re-eyebrow{ font-family:var(--quote); font-style:italic; font-size:clamp(1.2rem,3.2vw,1.55rem);
+    color:var(--rose-2); margin-bottom:.7rem; }
+  .rose-era .re-title{ font-family:var(--serif); font-weight:500; font-size:clamp(2.2rem,6vw,3.3rem);
+    color:var(--paper); line-height:1.06; letter-spacing:.01em; margin:0 0 1.1rem; }
+  .rose-era .re-title em{ font-style:italic; color:var(--rose-2); }
+  .rose-era .re-lead{ font-size:1.02rem; line-height:1.7; color:var(--cream-2); max-width:52ch;
+    margin:0 0 2rem; }
+  .re-offer{ text-align:left; max-width:520px; margin:0 0 2rem; padding-top:1.6rem;
+    border-top:1px solid rgba(255,248,239,0.16); }
+  .re-offer .re-name{ font-family:var(--serif); font-weight:500; font-size:1.5rem; color:var(--paper);
+    letter-spacing:.01em; margin-bottom:.5rem; }
+  .re-offer .re-desc{ font-size:.98rem; line-height:1.6; color:var(--blush); margin:0; }
+  .btn-rose{ display:inline-flex; align-items:center; gap:.6rem; font-family:var(--sans); font-weight:700;
+    font-size:.76rem; letter-spacing:.12em; text-transform:uppercase; color:var(--paper); background:var(--oxblood);
+    border-radius:8px; padding:1.05rem 1.9rem; cursor:pointer;
+    transition:background .25s var(--ease), transform .25s var(--ease); }
+  .btn-rose:hover{ background:var(--rose); transform:translateY(-1px); }
+  .rose-era .re-note{ font-family:var(--mono); font-size:.58rem; letter-spacing:.14em;
+    text-transform:uppercase; color:rgba(236,179,200,0.7); margin:1.4rem 0 0; }
+  .rose-era .re-secondary{ font-size:.92rem; color:var(--blush); margin:1.1rem 0 0; }
+  .rose-era .re-secondary a{ color:var(--rose-2); text-decoration:underline; text-underline-offset:3px; }
+  .rose-era .re-secondary a:hover{ color:var(--paper); }
+  .ks-reflections{ margin:1.5rem 0 0; }
+  .link-quiet{ font-family:var(--sans); font-size:.9rem; color:var(--oxblood); background:none;
+    border:none; cursor:pointer; text-decoration:underline; text-underline-offset:3px; padding:0;
+    transition:color .25s var(--ease); }
+  .link-quiet:hover{ color:var(--oxblood-2); }
+  footer.guide-foot .fmeta a{ color:var(--oxblood); }
+  footer.guide-foot .fmeta a:hover{ text-decoration:underline; }
 </style>
 </head>
 
@@ -350,8 +521,51 @@
           <p class="how">Tap the <b>&#8942; menu</b>, then <b>Add to Home screen</b>, then <b>Add</b>.</p>
         </div>
       </div>
+      <div class="install-cta" id="installCta">
+        <button class="btn-install" id="installBtn" type="button">Install The EXHALE</button>
+      </div>
     </div>
   </div>
+
+  <!-- ============ JOURNEY TRACKER ============ -->
+  <section class="journey reveal" id="journey" aria-label="Your progress">
+    <div class="journey-inner">
+      <div class="journey-head">
+        <span class="jlabel">Your EXHALE journey</span>
+        <span class="jcount"><b id="jDone">0</b> of 7 days</span>
+      </div>
+      <div class="journey-track" id="journeyTrack">
+        <button class="jstep" type="button" data-target="day1"><span class="dot"></span><span class="jname">Breathe</span></button>
+        <button class="jstep" type="button" data-target="day2"><span class="dot"></span><span class="jname">Rest</span></button>
+        <button class="jstep" type="button" data-target="day3"><span class="dot"></span><span class="jname">Trust</span></button>
+        <button class="jstep" type="button" data-target="day4"><span class="dot"></span><span class="jname">Receive</span></button>
+        <button class="jstep" type="button" data-target="day5"><span class="dot"></span><span class="jname">Beauty</span></button>
+        <button class="jstep" type="button" data-target="day6"><span class="dot"></span><span class="jname">Bloom</span></button>
+        <button class="jstep" type="button" data-target="declaration"><span class="dot"></span><span class="jname">Declare</span></button>
+      </div>
+      <button class="journey-resume" id="journeyResume" type="button">Continue where you left off &rarr;</button>
+    </div>
+  </section>
+
+  <!-- ============ DAILY REMINDER ============ -->
+  <section class="reminder reveal" id="reminder" aria-label="Daily reminder">
+    <div class="reminder-inner">
+      <div class="reminder-copy">
+        <div class="rlabel">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          A gentle daily nudge
+        </div>
+        <p>One quiet reminder a day to return to your EXHALE. Private, opt-in, and kept only on this device.</p>
+      </div>
+      <div class="reminder-controls">
+        <label class="rtime">Remind me at
+          <input type="time" id="reminderTime" value="07:00" aria-label="Reminder time" />
+        </label>
+        <button class="btn-remind" id="reminderToggle" type="button">Turn on</button>
+      </div>
+      <p class="reminder-note" id="reminderNote"></p>
+    </div>
+  </section>
 
   <div class="wrapper">
 
@@ -885,35 +1099,46 @@
         <div class="resolution-text">I put the cape down.<br />I choose myself.<br />I become the rose.</div>
         <div class="resolution-attributes">I am her. &#10022; I am whole. &#10022; I am becoming.</div>
       </div>
+
+      <!-- ============ SIGN YOUR DECLARATION (keepsake) ============ -->
+      <div class="keepsake reveal">
+        <div class="ks-label">Sign it &middot; Make it yours</div>
+        <p class="ks-intro">Add your name and keep your Declaration as a framed image, to print, set as your lock screen, or return to whenever the world asks you to be the rock again.</p>
+        <div class="ks-preview-wrap">
+          <canvas id="ksCanvas" width="1080" height="1350" class="ks-preview" role="img" aria-label="Preview of your Rose Era Declaration keepsake"></canvas>
+        </div>
+        <form class="ks-form" id="ksForm" novalidate>
+          <input type="text" id="ksName" placeholder="Sign your name" aria-label="Sign your name" autocomplete="name" maxlength="32" />
+        </form>
+        <div class="ks-save" id="ksSave">
+          <button class="btn-keepsake" id="ksSaveBtn" type="button">Save my Declaration</button>
+        </div>
+        <p class="ks-reflections">
+          <button type="button" id="exportJournal" class="link-quiet">Download my written reflections</button>
+        </p>
+      </div>
     </main>
 
-    <!-- ============ CLAIM (MailerLite) ============ -->
-    <section class="claim">
-      <div class="kicker reveal">Make it yours to keep</div>
-      <h3 class="reveal">Sign your Rose Era Declaration</h3>
-      <p class="claim-lead reveal">Enter your email and we&rsquo;ll send you the printable Rose Era Declaration, a keepsake to sign, frame, and return to whenever the world asks you to be the rock again.</p>
-
-      <!-- ============================================================
-           SIGNUP · DECLARATION  (MailerLite)
-           1. In MailerLite: build a form / automation that delivers the
-              printable Rose Era Declaration PDF, tagged to its own group.
-           2. Paste that form's POST action URL below (replace the placeholder).
-           3. Field name "fields[email]" matches MailerLite's embed format.
-           4. data-redirect fires on success (see script at bottom).
-      ============================================================ -->
-      <form class="claim-form reveal" action="REPLACE_WITH_MAILERLITE_DECLARATION_FORM_ACTION_URL" method="post" target="_blank" data-redirect="thank-you.html" novalidate>
-        <input type="email" name="fields[email]" placeholder="Your email address" required aria-label="Your email address" />
-        <button type="submit" class="btn-claim">Send my Declaration <span class="arr" aria-hidden="true">&rarr;</span></button>
-      </form>
-      <p class="claim-note reveal">No card &middot; No spam &middot; One tap to unsubscribe</p>
+    <!-- ============ ROSE ERA COACHING (paid next step) ============ -->
+    <section class="rose-era reveal" id="rose-era" aria-label="Rose Era Coaching">
+      <div class="re-eyebrow">You&rsquo;ve been the rock.</div>
+      <h2 class="re-title">Sis, it&rsquo;s time to become the <em>Rose.</em></h2>
+      <p class="re-lead">If this week stirred something you do not want to set back down, the Rose Era is where it continues: rhythm, confidence, softness, and self-image, rebuilt alongside women who understand exactly what it took to get here.</p>
+      <div class="re-offer">
+        <div class="re-name">Rose Era Coaching</div>
+        <p class="re-desc">For the woman ready to rebuild rhythm, confidence, and self-image with guidance and company. Small cohorts, personal calls, real accompaniment.</p>
+      </div>
+      <a class="btn-rose" href="https://rose-era-inquiry-form.netlify.app/" target="_blank" rel="noopener">Book a free strategy session</a>
+      <p class="re-note">A calm, no-pressure conversation &middot; No obligation to join</p>
+      <p class="re-secondary">Not ready yet? <a href="https://www.bloomwithquadia.com" target="_blank" rel="noopener">Stay close at bloomwithquadia.com</a></p>
     </section>
 
   </div>
 
   <!-- ============ FOOTER ============ -->
   <footer class="guide-foot">
-    <div class="fw"><span class="the">The</span> EXHALE</div>
-    <div class="fmeta">BLOOM with Quadia &middot; Issue 001</div>
+    <a class="fw" href="https://www.bloomwithquadia.com" target="_blank" rel="noopener"><span class="the">The</span> EXHALE</a>
+    <div class="fmeta">BLOOM with Quadia &middot; <a href="https://www.bloomwithquadia.com" target="_blank" rel="noopener">bloomwithquadia.com</a></div>
   </footer>
 
   <script>
@@ -963,15 +1188,390 @@
       revs.forEach(function(r){ r.classList.add('in'); });
     }
 
-    /* ---- MailerLite success redirect ---- */
-    document.querySelectorAll('form[data-redirect]').forEach(function(form){
-      form.addEventListener('submit', function(){
-        var url = form.getAttribute('data-redirect');
-        if (url && form.getAttribute('action').indexOf('REPLACE_') === -1){
-          setTimeout(function(){ window.location.href = url; }, 800);
-        }
+    /* ============================================================
+       PWA APP LAYER · progress · journaling · install · keepsake
+       All data is stored privately on THIS device (localStorage).
+       ============================================================ */
+    (function(){
+      var ORDER = ['day1','day2','day3','day4','day5','day6','declaration'];
+      var NAMES = { day1:'Breathe', day2:'Rest', day3:'Trust', day4:'Receive',
+                    day5:'Beauty', day6:'Bloom', declaration:'The Declaration' };
+
+      /* --- safe storage --- */
+      function get(k, d){ try{ var v = localStorage.getItem(k); return v===null? d : v; }catch(e){ return d; } }
+      function set(k, v){ try{ localStorage.setItem(k, v); }catch(e){} }
+      function doneSet(){
+        var s = {};
+        ORDER.forEach(function(id){ if(get('exhale.done.'+id)==='1') s[id]=true; });
+        return s;
+      }
+      function svgCheck(){ return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>'; }
+
+      /* ---------- JOURNALING: one private note per day ---------- */
+      document.querySelectorAll('.reflection-card:not(.taxonomy)').forEach(function(card){
+        var section = card.closest('section, main');
+        if(!section) return;
+        var id = section.id;
+        var key = 'exhale.journal.'+id;
+
+        var wrap = document.createElement('div');
+        wrap.className = 'journal';
+        wrap.innerHTML =
+          '<div class="journal-label">'+
+            '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>'+
+            'Your reflection'+
+          '</div>'+
+          '<textarea placeholder="Write freely. Let whatever wants to be said, be said&hellip;"></textarea>'+
+          '<p class="journal-note"><span>Saved privately on this device</span> <span class="saved">Saved &#10003;</span></p>';
+        card.parentNode.insertBefore(wrap, card.nextSibling);
+
+        var ta = wrap.querySelector('textarea');
+        var savedTag = wrap.querySelector('.saved');
+        ta.value = get(key, '');
+        var t;
+        ta.addEventListener('input', function(){
+          set(key, ta.value);
+          savedTag.classList.add('show');
+          clearTimeout(t);
+          t = setTimeout(function(){ savedTag.classList.remove('show'); }, 1400);
+        });
       });
-    });
+
+      /* ---------- MARK DAY COMPLETE (days 1-6) ---------- */
+      document.querySelectorAll('.declaration-box').forEach(function(box){
+        var section = box.closest('section');
+        if(!section) return;
+        var id = section.id;
+        var key = 'exhale.done.'+id;
+
+        var wrap = document.createElement('div');
+        wrap.className = 'day-complete';
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'btn-complete';
+        function label(done){
+          btn.innerHTML = '<span class="chk">'+svgCheck()+'</span>'+(done? 'Day complete' : 'Mark this day complete');
+          btn.classList.toggle('done', done);
+        }
+        label(get(key)==='1');
+        btn.addEventListener('click', function(){
+          var now = get(key)!=='1';
+          set(key, now? '1':'0');
+          label(now);
+          renderJourney();
+        });
+        wrap.appendChild(btn);
+        box.parentNode.insertBefore(wrap, box.nextSibling);
+      });
+
+      /* ---------- JOURNEY TRACKER ---------- */
+      var steps = Array.prototype.slice.call(document.querySelectorAll('#journeyTrack .jstep'));
+      var jDone = document.getElementById('jDone');
+      var resumeBtn = document.getElementById('journeyResume');
+
+      function firstUndone(done){
+        for(var i=0;i<ORDER.length;i++){ if(!done[ORDER[i]]) return ORDER[i]; }
+        return null; // all done
+      }
+      function renderJourney(){
+        var done = doneSet();
+        var count = 0;
+        var current = firstUndone(done);
+        steps.forEach(function(s){
+          var id = s.getAttribute('data-target');
+          var isDone = !!done[id];
+          if(isDone) count++;
+          s.classList.toggle('done', isDone);
+          s.classList.toggle('current', id===current);
+        });
+        if(jDone) jDone.textContent = count;
+        if(resumeBtn){
+          if(count===0){ resumeBtn.classList.remove('show'); }
+          else if(current){
+            resumeBtn.classList.add('show');
+            resumeBtn.textContent = 'Continue to ' + NAMES[current] + ' \u2192';
+            resumeBtn.dataset.target = current;
+          } else {
+            resumeBtn.classList.add('show');
+            resumeBtn.textContent = 'Revisit your Declaration \u2192';
+            resumeBtn.dataset.target = 'declaration';
+          }
+        }
+      }
+      function jumpTo(id){
+        var el = document.getElementById(id);
+        if(el){ var y = el.getBoundingClientRect().top + window.pageYOffset - 74;
+          window.scrollTo({ top:y, behavior:'smooth' }); }
+      }
+      steps.forEach(function(s){ s.addEventListener('click', function(){ jumpTo(s.getAttribute('data-target')); }); });
+      if(resumeBtn) resumeBtn.addEventListener('click', function(){ jumpTo(resumeBtn.dataset.target || 'day1'); });
+      renderJourney();
+
+      /* ---------- INSTALL PROMPT ---------- */
+      var deferredPrompt = null;
+      var installCta = document.getElementById('installCta');
+      var installBtn = document.getElementById('installBtn');
+      window.addEventListener('beforeinstallprompt', function(e){
+        e.preventDefault();
+        deferredPrompt = e;
+        if(installCta) installCta.classList.add('show');
+      });
+      if(installBtn){
+        installBtn.addEventListener('click', function(){
+          if(!deferredPrompt) return;
+          deferredPrompt.prompt();
+          deferredPrompt.userChoice.finally(function(){
+            deferredPrompt = null;
+            if(installCta) installCta.classList.remove('show');
+          });
+        });
+      }
+      window.addEventListener('appinstalled', function(){
+        if(installCta) installCta.classList.remove('show');
+      });
+
+      /* ---------- KEEPSAKE: sign + live preview + save ---------- */
+      var ksName = document.getElementById('ksName');
+      var ksCanvas = document.getElementById('ksCanvas');
+      var ksSave = document.getElementById('ksSave');
+      var ksSaveBtn = document.getElementById('ksSaveBtn');
+      var KEY_NAME = 'exhale.signature';
+
+      var fontsReady = false;
+      try{ document.fonts.ready.then(function(){ fontsReady = true; renderPreview(); }); }catch(e){ fontsReady = true; }
+
+      function ls(ctx, text, cx, y, spacing, align){
+        var widths = [], total = 0;
+        for(var i=0;i<text.length;i++){ var w = ctx.measureText(text[i]).width; widths.push(w); total += w + (i<text.length-1?spacing:0); }
+        var x = (align==='left') ? cx : cx - total/2;
+        var pa = ctx.textAlign; ctx.textAlign = 'left';
+        for(var j=0;j<text.length;j++){ ctx.fillText(text[j], x, y); x += widths[j] + spacing; }
+        ctx.textAlign = pa;
+        return total;
+      }
+
+      /* editorial Rose Era Declaration - draws into a 1080x1350 context */
+      function drawKeepsake(x, name){
+        var W = 1080, H = 1350;
+        x.clearRect(0,0,W,H);
+
+        var bg = x.createLinearGradient(0,0,0,H); bg.addColorStop(0,'#FBF4EC'); bg.addColorStop(1,'#F5EADE');
+        x.fillStyle = bg; x.fillRect(0,0,W,H);
+
+        // double frame
+        x.strokeStyle='rgba(126,31,72,0.5)'; x.lineWidth=2; x.strokeRect(70,70,W-140,H-140);
+        x.strokeStyle='rgba(166,42,94,0.28)'; x.lineWidth=1; x.strokeRect(86,86,W-172,H-172);
+
+        x.textAlign='center'; x.textBaseline='alphabetic';
+        // wordmark
+        x.fillStyle='#2B0E24'; x.font='700 34px "Bodoni Moda",Georgia,serif'; ls(x,'BLOOM',W/2,172,3);
+        x.fillStyle='#A62A5E'; x.font='40px "Great Vibes",cursive'; x.fillText('with Quadia',W/2,218);
+        // kicker
+        x.fillStyle='#A62A5E'; x.font='600 20px ui-monospace,Menlo,monospace'; ls(x,'DAY SEVEN · THE KEEPSAKE',W/2,292,7);
+        // title
+        x.fillStyle='#2B0E24'; x.font='500 26px "Bodoni Moda",Georgia,serif'; ls(x,'THE',W/2,336,14);
+        x.font='500 92px "Bodoni Moda",Georgia,serif'; x.fillText('Rose Era',W/2,426);
+        x.font='500 40px "Bodoni Moda",Georgia,serif'; ls(x,'DECLARATION',W/2,478,12);
+        // divider
+        x.strokeStyle='rgba(43,14,36,0.25)';x.lineWidth=1;x.beginPath();x.moveTo(W/2-70,512);x.lineTo(W/2-14,512);x.stroke();x.beginPath();x.moveTo(W/2+14,512);x.lineTo(W/2+70,512);x.stroke();x.fillStyle='#C84F77';x.beginPath();x.arc(W/2,512,3.5,0,Math.PI*2);x.fill();
+        // gold affirmation lines
+        var gold=x.createLinearGradient(200,0,880,0);
+        gold.addColorStop(0,'#8A4A3A');gold.addColorStop(.32,'#C6895C');gold.addColorStop(.5,'#EBC891');gold.addColorStop(.68,'#C6895C');gold.addColorStop(1,'#8A4A3A');
+        x.fillStyle=gold; x.font='500 62px "Bodoni Moda",Georgia,serif';
+        x.fillText('I put the cape down.',W/2,606);
+        x.fillText('I choose myself.',W/2,684);
+        x.fillText('I become the rose.',W/2,762);
+        // body
+        x.fillStyle='#5A4452'; x.font='italic 30px "Cormorant Garamond",Georgia,serif';
+        x.fillText('Being the strong one no longer gets to cost me',W/2,836);
+        x.fillText('my body, my peace, my confidence, or my joy.',W/2,874);
+        // attributes
+        x.fillStyle='#A62A5E'; x.font='500 21px ui-monospace,Menlo,monospace'; ls(x,'I AM HER   ·   I AM WHOLE   ·   I AM BECOMING',W/2,948,4);
+
+        // signature + date fields
+        var ds=new Date().toLocaleDateString(undefined,{year:'numeric',month:'long',day:'numeric'});
+        var rowY=1122;
+        x.fillStyle='#5A4452'; x.font='500 15px ui-monospace,Menlo,monospace'; ls(x,'SIGNED',150,rowY-46,4,'left');
+        x.strokeStyle='rgba(43,14,36,0.35)'; x.lineWidth=1; x.beginPath(); x.moveTo(150,rowY); x.lineTo(490,rowY); x.stroke();
+        if(name){ x.fillStyle='#A62A5E'; x.font='58px "Great Vibes",cursive'; x.textAlign='center'; x.fillText(name,320,rowY-6); }
+        else { x.fillStyle='rgba(90,68,82,0.4)'; x.font='italic 26px "Cormorant Garamond",serif'; x.textAlign='center'; x.fillText('your name',320,rowY-10); }
+        x.fillStyle='#5A4452'; x.font='500 15px ui-monospace,Menlo,monospace'; ls(x,'DATED',590,rowY-46,4,'left');
+        x.strokeStyle='rgba(43,14,36,0.35)'; x.lineWidth=1; x.beginPath(); x.moveTo(590,rowY); x.lineTo(930,rowY); x.stroke();
+        x.fillStyle='#3A2335'; x.font='italic 29px "Cormorant Garamond",Georgia,serif'; x.textAlign='center'; x.fillText(ds,760,rowY-8);
+        // footer
+        x.fillStyle='#2B0E24'; x.font='600 24px "Bodoni Moda",Georgia,serif'; x.fillText('The EXHALE',W/2,1252);
+        x.fillStyle='#A62A5E'; x.font='400 16px ui-monospace,Menlo,monospace'; ls(x,'BLOOM WITH QUADIA',W/2,1286,4);
+      }
+
+      function renderPreview(){
+        if(!ksCanvas) return;
+        drawKeepsake(ksCanvas.getContext('2d'), ksName ? ksName.value.trim() : '');
+      }
+
+      if(ksName){
+        ksName.value = get(KEY_NAME, '');
+        if(ksName.value.trim()) ksSave.classList.add('show');
+        var rt;
+        ksName.addEventListener('input', function(){
+          set(KEY_NAME, ksName.value);
+          if(ksName.value.trim()){ ksSave.classList.add('show'); } else { ksSave.classList.remove('show'); }
+          clearTimeout(rt); rt = setTimeout(renderPreview, 110);
+        });
+        var ksForm = document.getElementById('ksForm');
+        if(ksForm) ksForm.addEventListener('submit', function(e){ e.preventDefault(); ksName.blur(); });
+      }
+      renderPreview();
+
+      if(ksSaveBtn){
+        ksSaveBtn.addEventListener('click', function(){
+          var name = ksName.value.trim();
+          if(!name) return;
+          set('exhale.done.declaration', '1');
+          renderJourney();
+          var out = document.createElement('canvas'); out.width = 1080; out.height = 1350;
+          drawKeepsake(out.getContext('2d'), name);
+          var orig = ksSaveBtn.innerHTML;
+          ksSaveBtn.disabled = true; ksSaveBtn.style.opacity = '.7';
+          out.toBlob(async function(blob){
+            try{
+              if(!blob) return;
+              var file = new File([blob], 'My-Rose-Era-Declaration.png', { type:'image/png' });
+              if(navigator.canShare && navigator.canShare({ files:[file] })){
+                try{ await navigator.share({ files:[file], title:'My Rose Era Declaration' }); }
+                catch(e){}
+              } else {
+                var url = URL.createObjectURL(blob);
+                var a = document.createElement('a');
+                a.href = url; a.download = 'My-Rose-Era-Declaration.png';
+                document.body.appendChild(a); a.click(); a.remove();
+                setTimeout(function(){ URL.revokeObjectURL(url); }, 1000);
+              }
+            } finally {
+              ksSaveBtn.disabled=false; ksSaveBtn.style.opacity='';
+              ksSaveBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Saved';
+              setTimeout(function(){ ksSaveBtn.innerHTML = orig; }, 2200);
+            }
+          }, 'image/png');
+        });
+      }
+
+      /* ---------- EXPORT WRITTEN REFLECTIONS (private, on-device) ---------- */
+      var exportBtn = document.getElementById('exportJournal');
+      if(exportBtn){
+        var jTitles = { day1:'Day One \u00b7 Breathe', day2:'Day Two \u00b7 Rest', day3:'Day Three \u00b7 Trust', day4:'Day Four \u00b7 Receive', day5:'Day Five \u00b7 Beauty', day6:'Day Six \u00b7 Bloom' };
+        exportBtn.addEventListener('click', function(){
+          var out = ['THE EXHALE \u00b7 My reflections', new Date().toLocaleDateString(undefined,{year:'numeric',month:'long',day:'numeric'}), ''];
+          var any = false;
+          ['day1','day2','day3','day4','day5','day6'].forEach(function(id){
+            var v = get('exhale.journal.'+id, '').trim();
+            if(v){ any = true; out.push(jTitles[id]); out.push(v); out.push(''); }
+          });
+          var sig = get('exhale.signature','').trim();
+          if(sig) out.push('Signed, ' + sig);
+          if(!any){ exportBtn.textContent = 'Nothing written yet'; setTimeout(function(){ exportBtn.textContent = 'Download my written reflections'; }, 1800); return; }
+          var blob = new Blob([out.join('\n')], { type:'text/plain' });
+          var url = URL.createObjectURL(blob);
+          var a = document.createElement('a'); a.href = url; a.download = 'My-EXHALE-Reflections.txt';
+          document.body.appendChild(a); a.click(); a.remove();
+          setTimeout(function(){ URL.revokeObjectURL(url); }, 1000);
+        });
+      }
+
+      /* ---------- DAILY REMINDER (opt-in, private, on-device) ---------- */
+      var remToggle = document.getElementById('reminderToggle');
+      var remTime = document.getElementById('reminderTime');
+      var remNote = document.getElementById('reminderNote');
+      var REM_ON = 'exhale.reminder.enabled', REM_T = 'exhale.reminder.time';
+      var supportsNotif = ('Notification' in window) && ('serviceWorker' in navigator);
+      var supportsTrigger = supportsNotif && ('TimestampTrigger' in window);
+      var sessionTimer = null;
+
+      function fmtTime(hhmm){
+        var p = (hhmm||'07:00').split(':'); var h = +p[0]||0, m = p[1]||'00';
+        var ap = h>=12 ? 'pm':'am'; var h12 = ((h+11)%12)+1;
+        return h12 + ':' + m + ' ' + ap;
+      }
+      function nextAt(hhmm){
+        var p = (hhmm||'07:00').split(':'); var h = +p[0]||7, m = +p[1]||0;
+        var t = new Date(); t.setHours(h, m, 0, 0);
+        if(t.getTime() <= Date.now() + 2000) t.setDate(t.getDate()+1);
+        return t;
+      }
+      var REM_BODY = 'A few quiet minutes are waiting. Return to your reset.';
+      async function clearScheduled(reg){
+        try{ if(reg.getNotifications){ var ns = await reg.getNotifications({ tag:'exhale-daily', includeTriggered:true }); ns.forEach(function(n){ n.close(); }); } }catch(e){}
+      }
+      async function scheduleReminder(){
+        if(get(REM_ON)!=='1' || !supportsNotif || Notification.permission!=='granted') return;
+        var when = nextAt(get(REM_T,'07:00'));
+        try{
+          var reg = await navigator.serviceWorker.ready;
+          await clearScheduled(reg);
+          if(supportsTrigger){
+            await reg.showNotification('Your EXHALE moment', {
+              tag:'exhale-daily', body: REM_BODY, icon:'icons/icon-192.png', badge:'icons/icon-192.png',
+              showTrigger: new TimestampTrigger(when.getTime()), data:{ url:'the-exhale.html' }
+            });
+          }
+        }catch(e){}
+        // in-session fallback: fires while the tab is open (covers browsers without triggers)
+        if(sessionTimer) clearTimeout(sessionTimer);
+        var ms = when.getTime() - Date.now();
+        if(ms > 0 && ms < 26*3600*1000){
+          sessionTimer = setTimeout(function(){
+            if(get(REM_ON)==='1' && supportsNotif && Notification.permission==='granted' && !supportsTrigger){
+              navigator.serviceWorker.ready.then(function(reg){
+                reg.showNotification('Your EXHALE moment', { body: REM_BODY, icon:'icons/icon-192.png', tag:'exhale-daily', data:{ url:'the-exhale.html' } });
+              });
+            }
+            scheduleReminder();
+          }, ms + 800);
+        }
+      }
+      function setRemUI(){
+        if(!remToggle) return;
+        var on = get(REM_ON)==='1';
+        remToggle.textContent = on ? 'Turn off' : 'Turn on';
+        remToggle.classList.toggle('on', on);
+        if(!supportsNotif){ remToggle.disabled = true; remNote.textContent = 'Reminders aren\u2019t supported in this browser.'; return; }
+        if(Notification.permission==='denied'){ remNote.textContent = 'Notifications are blocked. Enable them in your browser settings to turn this on.'; }
+        else if(on){ remNote.textContent = 'On. We\u2019ll nudge you at ' + fmtTime(get(REM_T,'07:00')) + ' while the guide is open. Add it to your home screen for reminders that reach you daily.'; }
+        else { remNote.textContent = ''; }
+      }
+      if(remTime){
+        remTime.value = get(REM_T,'07:00');
+        remTime.addEventListener('change', function(){
+          set(REM_T, remTime.value || '07:00');
+          if(get(REM_ON)==='1') scheduleReminder();
+          setRemUI();
+        });
+      }
+      if(remToggle){
+        remToggle.addEventListener('click', async function(){
+          if(!supportsNotif) return;
+          if(get(REM_ON)==='1'){
+            set(REM_ON,'0');
+            if(sessionTimer) clearTimeout(sessionTimer);
+            try{ var reg = await navigator.serviceWorker.ready; await clearScheduled(reg); }catch(e){}
+            setRemUI();
+          } else {
+            var perm = Notification.permission;
+            if(perm!=='granted'){ try{ perm = await Notification.requestPermission(); }catch(e){} }
+            if(perm==='granted'){ set(REM_ON,'1'); await scheduleReminder(); }
+            setRemUI();
+          }
+        });
+      }
+      setRemUI();
+      if(get(REM_ON)==='1' && supportsNotif && Notification.permission==='granted'){ scheduleReminder(); }
+    })();
+
+    /* ---- PWA · register service worker (offline + installable) ---- */
+    if ('serviceWorker' in navigator){
+      window.addEventListener('load', function(){
+        navigator.serviceWorker.register('sw.js').catch(function(){ /* offline-only, ignore */ });
+      });
+    }
   </script>
 
 </body>
