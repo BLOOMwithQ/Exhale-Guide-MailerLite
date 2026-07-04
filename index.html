@@ -28,9 +28,9 @@
 
 <!-- ============ PWA · installable + offline ============ -->
 <link rel="manifest" href="manifest.webmanifest" />
-<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png" />
-<link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png" />
-<link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png" />
+<link rel="icon" type="image/png" sizes="512x512" href="icon-512.png" />
+<link rel="apple-touch-icon" href="apple-touch-icon.png" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -1509,7 +1509,7 @@
           await clearScheduled(reg);
           if(supportsTrigger){
             await reg.showNotification('Your EXHALE moment', {
-              tag:'exhale-daily', body: REM_BODY, icon:'icons/icon-192.png', badge:'icons/icon-192.png',
+              tag:'exhale-daily', body: REM_BODY, icon:'icon-192.png', badge:'icon-192.png',
               showTrigger: new TimestampTrigger(when.getTime()), data:{ url:'the-exhale.html' }
             });
           }
@@ -1521,7 +1521,7 @@
           sessionTimer = setTimeout(function(){
             if(get(REM_ON)==='1' && supportsNotif && Notification.permission==='granted' && !supportsTrigger){
               navigator.serviceWorker.ready.then(function(reg){
-                reg.showNotification('Your EXHALE moment', { body: REM_BODY, icon:'icons/icon-192.png', tag:'exhale-daily', data:{ url:'the-exhale.html' } });
+                reg.showNotification('Your EXHALE moment', { body: REM_BODY, icon:'icon-192.png', tag:'exhale-daily', data:{ url:'the-exhale.html' } });
               });
             }
             scheduleReminder();
