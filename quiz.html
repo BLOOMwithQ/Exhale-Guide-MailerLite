@@ -14,16 +14,11 @@
     --rose:#E27FA6; --roselt:#F0A9C4; --berry:#C25E85;
     --hair:rgba(242,233,222,.14);
   }
-  *{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
-  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  *{box-sizing:border-box;margin:0}
+  html{scroll-behavior:smooth}
   body{background:var(--bg);color:var(--body);font-family:'Jost',sans-serif;font-weight:300;
        min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;align-items:center;
-       padding:28px 20px 40px;
-       padding-top:max(28px,env(safe-area-inset-top));
-       padding-left:max(20px,env(safe-area-inset-left));
-       padding-right:max(20px,env(safe-area-inset-right));
-       padding-bottom:max(40px,env(safe-area-inset-bottom));
-       line-height:1.65;font-size:16px}
+       padding:28px 20px 40px;line-height:1.65;font-size:16px}
   .shell{width:100%;max-width:560px;display:flex;flex-direction:column;flex:1}
   .brand{font-family:'Playfair Display',serif;letter-spacing:.32em;font-size:15px;color:var(--cream);text-align:center}
   .brand small{display:block;letter-spacing:.28em;font-size:9px;color:var(--faint);margin-top:4px}
@@ -42,8 +37,7 @@
   .meta{margin-top:16px;font-size:13px;color:var(--faint);letter-spacing:.06em}
   .btn{display:inline-block;border:none;cursor:pointer;font-family:'Jost';font-weight:500;
        letter-spacing:.22em;font-size:12px;text-transform:uppercase;border-radius:6px;
-       padding:17px 30px;margin-top:26px;background:var(--berry);color:#fff;width:100%;text-align:center;
-       touch-action:manipulation}
+       padding:17px 30px;margin-top:26px;background:var(--berry);color:#fff;width:100%;text-align:center}
   .btn.ghost{background:transparent;border:1px solid var(--hair);color:var(--cream)}
   .btn:focus-visible{outline:2px solid var(--rose);outline-offset:3px}
   .btn:active{transform:scale(.99)}
@@ -56,17 +50,10 @@
       font-size:clamp(22px,5.8vw,29px);line-height:1.3;margin-bottom:22px}
   .opt{display:block;width:100%;text-align:left;background:transparent;border:1px solid var(--hair);
        color:var(--body);border-radius:8px;padding:16px 18px;margin:12px 0;font-family:'Jost';
-       font-weight:300;font-size:16px;line-height:1.5;cursor:pointer;transition:border-color .2s,color .2s;
-       min-height:44px;touch-action:manipulation}
-  .opt:focus-visible{border-color:var(--rose);color:var(--cream);outline:none}
-  .opt:active,.opt.sel{border-color:var(--rose);color:var(--cream);background:rgba(226,127,166,.08)}
-  .opt.dim{opacity:.4}
-  @media (hover:hover) and (pointer:fine){
-    .opt:hover{border-color:var(--rose);color:var(--cream)}
-  }
+       font-weight:300;font-size:16px;line-height:1.5;cursor:pointer;transition:border-color .2s,color .2s;min-height:44px}
+  .opt:hover,.opt:focus-visible{border-color:var(--rose);color:var(--cream);outline:none}
   .back{background:none;border:none;color:var(--faint);font-family:'Jost';font-size:12px;
-        letter-spacing:.2em;text-transform:uppercase;cursor:pointer;margin-top:18px;padding:10px 0;
-        touch-action:manipulation;min-height:44px}
+        letter-spacing:.2em;text-transform:uppercase;cursor:pointer;margin-top:18px;padding:10px 0}
 
   /* gate */
   .preview{border:1px solid var(--hair);border-radius:10px;padding:26px 22px;margin-top:8px}
@@ -95,9 +82,7 @@
   footer{margin-top:auto;padding-top:44px;text-align:center;color:var(--faint);
          font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;line-height:2.1}
   footer a{color:var(--faint);text-decoration:none}
-  @media (hover:hover) and (pointer:fine){
-    footer a:hover{color:var(--rose)}
-  }
+  footer a:hover{color:var(--rose)}
   @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -309,7 +294,6 @@ function go(id){document.querySelectorAll(".screen").forEach(s=>s.classList.remo
   if(id==="s-q")render();}
 
 function render(){
-  if(document.activeElement) document.activeElement.blur();
   const q=Q[i];
   document.getElementById("bar").style.width=(i/Q.length*100)+"%";
   document.getElementById("qnum").textContent="Question "+(i+1)+" of "+Q.length;
@@ -318,14 +302,8 @@ function render(){
   const box=document.getElementById("opts");box.innerHTML="";
   [...q.o].sort(()=>Math.random()-.5).forEach(([txt,key])=>{
     const b=document.createElement("button");b.className="opt";b.type="button";b.textContent=txt;
-    b.onclick=()=>{
-      if(box.classList.contains("locked"))return;
-      box.classList.add("locked");
-      b.blur();b.classList.add("sel");
-      [...box.children].forEach(x=>{if(x!==b)x.classList.add("dim");});
-      score[key]++;history.push(key);track('question_answered',{q:i+1});
-      setTimeout(()=>{ i++; i<Q.length?render():finish(); },260);
-    };
+    b.onclick=()=>{score[key]++;history.push(key);track('question_answered',{q:i+1});
+      i++; i<Q.length?render():finish();};
     box.appendChild(b);});
 }
 function goBack(){ if(i===0)return; i--; const k=history.pop(); if(k)score[k]--; render(); }
