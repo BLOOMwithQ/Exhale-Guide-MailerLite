@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>What Kind of Strong Are You? · BLOOM with Quadia</title>
+<meta name="description" content="A private, 3-minute truth for the woman who's been everybody's rock. Find your strong-woman persona — and why she won't let you rest." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#201020; --bg2:#271329; --panel:#2A152C;
+    --cream:#F2E9DE; --body:#C7B4C4; --faint:#8F7590;
+    --rose:#E27FA6; --roselt:#F0A9C4; --berry:#C25E85;
+    --hair:rgba(242,233,222,.14);
+  }
+  *{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{background:var(--bg);color:var(--body);font-family:'Jost',sans-serif;font-weight:300;
+       min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;align-items:center;
+       padding:28px 20px 40px;
+       padding-top:max(28px,env(safe-area-inset-top));
+       padding-left:max(20px,env(safe-area-inset-left));
+       padding-right:max(20px,env(safe-area-inset-right));
+       padding-bottom:max(40px,env(safe-area-inset-bottom));
+       line-height:1.65;font-size:16px}
+  .shell{width:100%;max-width:560px;display:flex;flex-direction:column;flex:1}
+  .brand{font-family:'Playfair Display',serif;letter-spacing:.32em;font-size:15px;color:var(--cream);text-align:center}
+  .brand small{display:block;letter-spacing:.28em;font-size:9px;color:var(--faint);margin-top:4px}
+  .kicker{display:flex;align-items:center;gap:10px;color:var(--rose);letter-spacing:.26em;
+          font-size:11px;text-transform:uppercase;font-weight:400;margin-bottom:14px}
+  .kicker::before{content:"";width:26px;height:1px;background:var(--rose)}
+  h1,h2{font-family:'Playfair Display',serif;font-weight:500;color:var(--cream);line-height:1.16}
+  em{font-family:'Playfair Display',serif;font-style:italic;color:var(--rose)}
+  .screen{display:none;animation:fade .5s ease;padding-top:7vh}
+  .screen.on{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+  /* landing */
+  .h-land{font-size:clamp(32px,8vw,46px)}
+  .lead{margin-top:18px;max-width:44ch}
+  .meta{margin-top:16px;font-size:13px;color:var(--faint);letter-spacing:.06em}
+  .btn{display:inline-block;border:none;cursor:pointer;font-family:'Jost';font-weight:500;
+       letter-spacing:.22em;font-size:12px;text-transform:uppercase;border-radius:6px;
+       padding:17px 30px;margin-top:26px;background:var(--berry);color:#fff;width:100%;text-align:center;
+       touch-action:manipulation}
+  .btn.ghost{background:transparent;border:1px solid var(--hair);color:var(--cream)}
+  .btn:focus-visible{outline:2px solid var(--rose);outline-offset:3px}
+  .btn:active{transform:scale(.99)}
+
+  /* questions */
+  .prog{height:1px;background:var(--hair);margin:26px 0 30px;position:relative}
+  .prog i{position:absolute;left:0;top:0;height:1px;width:0;background:var(--rose);transition:width .4s}
+  .qk{color:var(--rose);letter-spacing:.26em;font-size:11px;text-transform:uppercase;margin-bottom:12px}
+  .qt{font-family:'Playfair Display',serif;font-weight:500;color:var(--cream);
+      font-size:clamp(22px,5.8vw,29px);line-height:1.3;margin-bottom:22px}
+  .opt{display:block;width:100%;text-align:left;background:transparent;border:1px solid var(--hair);
+       color:var(--body);border-radius:8px;padding:16px 18px;margin:12px 0;font-family:'Jost';
+       font-weight:300;font-size:16px;line-height:1.5;cursor:pointer;transition:border-color .2s,color .2s;
+       min-height:44px;touch-action:manipulation}
+  .opt:focus-visible{border-color:var(--rose);color:var(--cream);outline:none}
+  .opt:active,.opt.sel{border-color:var(--rose);color:var(--cream);background:rgba(226,127,166,.08)}
+  .opt.dim{opacity:.4}
+  @media (hover:hover) and (pointer:fine){
+    .opt:hover{border-color:var(--rose);color:var(--cream)}
+  }
+  .back{background:none;border:none;color:var(--faint);font-family:'Jost';font-size:12px;
+        letter-spacing:.2em;text-transform:uppercase;cursor:pointer;margin-top:18px;padding:10px 0;
+        touch-action:manipulation;min-height:44px}
+
+  /* gate */
+  .preview{border:1px solid var(--hair);border-radius:10px;padding:26px 22px;margin-top:8px}
+  .pname{font-size:clamp(30px,8vw,42px);text-align:center;margin:6px 0 2px}
+  .pline{text-align:center;color:var(--body);font-size:16px;max-width:40ch;margin:10px auto 0}
+  .lock{color:var(--faint);font-size:13px;text-align:center;margin-top:18px;letter-spacing:.04em}
+  input[type=text],input[type=email]{width:100%;background:var(--bg2);border:1px solid var(--hair);
+      border-radius:8px;color:var(--cream);padding:15px 16px;font-family:'Jost';font-size:16px;
+      margin-top:12px;outline:none;min-height:44px}
+  input:focus-visible{border-color:var(--rose)}
+  input::placeholder{color:var(--faint)}
+  .err{color:var(--roselt);font-size:13px;margin-top:8px;display:none}
+  .fine{font-size:12.5px;color:var(--faint);margin-top:14px;text-align:center;line-height:1.6}
+
+  /* result */
+  .r-sec{border-top:1px solid var(--hair);padding:20px 0 6px;margin-top:20px}
+  .r-lab{color:var(--rose);letter-spacing:.24em;font-size:10.5px;text-transform:uppercase;margin-bottom:8px}
+  .r-body{color:var(--body);font-size:15.5px}
+  .r-body b{color:var(--cream);font-weight:400}
+  .r-list{list-style:none;padding:0}
+  .r-list li{padding-left:20px;position:relative;margin:8px 0;font-size:15.5px}
+  .r-list li::before{content:"—";position:absolute;left:0;color:var(--rose)}
+  .mirror{font-size:16.5px;line-height:1.75;color:var(--body);margin-top:14px}
+  .mirror b{color:var(--cream);font-weight:400}
+
+  footer{margin-top:auto;padding-top:44px;text-align:center;color:var(--faint);
+         font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;line-height:2.1}
+  footer a{color:var(--faint);text-decoration:none}
+  @media (hover:hover) and (pointer:fine){
+    footer a:hover{color:var(--rose)}
+  }
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="brand">BLOOM<small>— WITH QUADIA —</small></div>
+
+  <!-- ============ LANDING ============ -->
+  <section class="screen on" id="s-landing" aria-label="Quiz introduction">
+    <div class="kicker">When strong became your identity</div>
+    <h1 class="h-land">What kind of <em>strong</em> are you?</h1>
+    <p class="lead">Somewhere along the way, being strong stopped being something you did and quietly became who you are. This is a private, three-minute truth for the woman who's been everybody's rock — eight questions to name <b style="color:var(--cream);font-weight:400">which strong is running your life, and why she won't let you rest.</b></p>
+    <p class="meta">8 questions · about 3 minutes · your answers stay private</p>
+    <button class="btn" onclick="track('quiz_started');go('s-q')">Begin the truth →</button>
+  </section>
+
+  <!-- ============ QUESTIONS ============ -->
+  <section class="screen" id="s-q" aria-live="polite" aria-label="Quiz questions">
+    <div class="prog" aria-hidden="true"><i id="bar"></i></div>
+    <div class="qk" id="qnum"></div>
+    <h2 class="qt" id="qtext"></h2>
+    <div id="opts" role="group" aria-labelledby="qtext"></div>
+    <button class="back" id="backbtn" onclick="goBack()" style="visibility:hidden">← Back</button>
+  </section>
+
+  <!-- ============ GATE (preview → email) ============ -->
+  <section class="screen" id="s-gate" aria-label="Your result preview">
+    <div class="kicker">Your result is ready</div>
+    <div class="preview">
+      <h2 class="pname" id="gname"></h2>
+      <p class="pline" id="gline"></p>
+      <p class="lock">Your full reading — the strength underneath it, what's keeping you stuck, and your personal starting point in the free 7-day reset — is one step away.</p>
+      <!-- MailerLite: paste your embedded form's action URL in ML_FORM_ACTION below.
+           Create a custom subscriber field named "archetype" for segmentation. -->
+      <form id="gateform" onsubmit="return submitGate(event)" novalidate>
+        <label for="fname" class="visually-hidden" style="position:absolute;left:-9999px">First name</label>
+        <input type="text" id="fname" placeholder="First name" autocomplete="given-name" />
+        <label for="femail" style="position:absolute;left:-9999px">Email address</label>
+        <input type="email" id="femail" placeholder="Your best email" autocomplete="email" required />
+        <p class="err" id="err">A real email unlocks the reading, sis — check the spelling.</p>
+        <input type="hidden" id="farchetype" value="" />
+        <button class="btn" type="submit">Unlock my full reading →</button>
+      </form>
+      <p class="fine">You'll also receive The EXHALE — the free 7-day reset — one gentle day at a time.<br/>No spam. Unsubscribe anytime, no hard feelings.</p>
+    </div>
+  </section>
+
+  <!-- ============ RESULT ============ -->
+  <section class="screen" id="s-result" aria-label="Your full result">
+    <div class="kicker">Your strong-woman persona</div>
+    <h2 class="pname" id="rname"></h2>
+    <p class="pline" id="rsummary"></p>
+    <p class="mirror" id="rmirror"></p>
+
+    <div class="r-sec"><div class="r-lab">Your core strength — honor it first</div><p class="r-body" id="rstrength"></p></div>
+    <div class="r-sec"><div class="r-lab">The cost you've been paying</div><p class="r-body" id="rchallenge"></p></div>
+    <div class="r-sec"><div class="r-lab">What's actually keeping you stuck</div><p class="r-body" id="rstuck"></p></div>
+    <div class="r-sec"><div class="r-lab">Three moves for this season</div><ul class="r-list" id="ractions"></ul></div>
+    <div class="r-sec"><div class="r-lab">One thing to stop</div><p class="r-body" id="rstop"></p></div>
+    <div class="r-sec"><div class="r-lab">Your next 30 days</div><p class="r-body" id="rfocus"></p></div>
+    <div class="r-sec"><div class="r-lab">Where your reset begins</div><p class="r-body" id="roffer"></p></div>
+
+    <a href="https://yourexhale.bloomwithquadia.com" style="text-decoration:none" onclick="track('cta_clicked',{cta:'exhale'})">
+      <button class="btn">Begin the Exhale, free →</button></a>
+    <a href="https://bloom-rose-noir.netlify.app/" style="text-decoration:none" onclick="track('cta_clicked',{cta:'night'})">
+      <button class="btn ghost">Tonight's sanctuary · BLOOM @ Night</button></a>
+    <p class="fine">Free 7-day guided reflection. No card, no spam.</p>
+  </section>
+
+  <footer>
+    <a href="https://www.bloomwithquadia.com">BLOOMWITHQUADIA.COM</a> &nbsp;·&nbsp;
+    <a href="mailto:quadia@bloomwithquadia.com">QUADIA@BLOOMWITHQUADIA.COM</a><br/>
+    <a href="https://www.instagram.com/bloomwithquadia">INSTAGRAM</a> &nbsp;
+    <a href="https://www.tiktok.com/@bloomwithquadia">TIKTOK</a> &nbsp;
+    <a href="#">THREADS</a> &nbsp;
+    <a href="#">PINTEREST</a>
+  </footer>
+</div>
+
+<script>
+/* ============ ANALYTICS (GA4-ready) ============ */
+function track(ev,data){ try{
+  (window.dataLayer=window.dataLayer||[]).push(Object.assign({event:ev},data||{}));
+  if(window.gtag) gtag('event',ev,data||{});
+}catch(e){} }
+track('quiz_viewed');
+
+/* ============ PERSONAS ============ */
+const P={
+autopilot:{name:'The <em>Autopilot</em>',
+ summary:"Strong by disappearing into function — present everywhere, inhabiting nothing.",
+ mirror:"You are extraordinarily good at existing. Efficient. Reliable. The one who gets it all done. But somewhere along the way, your days became something to manage instead of something to inhabit. You pass mirrors without seeing yourself. You can't remember the last meal you actually tasted. Nothing is wrong, exactly — <b>and that's what worries you.</b> Your strength became a costume you never take off, and underneath it, you've been running your life without being in it.",
+ strength:"Steadiness. You are the calm in every storm, and the people you love have built their lives on that reliability. That is real, and it counts.",
+ challenge:"Numbness dressed as competence. When strength runs on autopilot, aliveness is the first thing rationed away — and no one notices, because everything still gets done.",
+ stuck:"Function feels safe because feeling doesn't. As long as the days stay administrative, nothing can hurt — and nothing can bloom.",
+ actions:["Three times a day, stop and ask one question: what do I need in this moment? Answer as yourself, not as a role.",
+          "Eat one meal this week with no screen and no multitasking — taste it on purpose.",
+          "Tell one safe person the true answer when they ask how you are."],
+ stop:"Stop measuring your days by what you accomplished. Start noticing whether you were in them.",
+ focus:"Thirty days of small returns to your own life: breath before phone, one felt meal a day, one honest check-in a week. Presence is the practice; nothing else changes yet.",
+ offer:"The EXHALE begins exactly where you are — <b>Day 1, Breathe,</b> was written for you. Not a breathing exercise. A homecoming. And for the nights your mind won't come off the clock, the Audio Vault inside BLOOM @ Night escorts you out of vigilance.",
+ day:1},
+earner:{name:'The <em>Earner</em>',
+ summary:"Strong by producing — living under a contract that says rest comes after everything is finished.",
+ mirror:"You have a contract you never remember signing: <b>rest comes after.</b> After the emails. After the kitchen. After everyone's okay. But the horizon keeps moving — there is always another after. The moment you sit down, the guilt arrives on cue. Not because rest is wrong, but because you were never shown it was allowed. You've been wearing exhaustion like proof that you loved well, and calling your depletion generosity.",
+ strength:"Devotion. Your work ethic has built careers, held households, and carried people who never knew who was carrying them. Nobody outworks your love.",
+ challenge:"You have fused your worth to your output — so stopping doesn't feel like rest, it feels like disappearing.",
+ stuck:"The guilt isn't evidence you should keep going. It's evidence of how deeply you were trained to earn your worth. Guilt that arrives when you sit down is conditioning, not conscience.",
+ actions:["Sit down once a day before something is finished — on purpose, as practice, not as reward.",
+          "Put rest on the calendar like a meeting that cannot be moved, starting with twenty minutes.",
+          "When the guilt arrives, name it out loud: “that's the old contract talking” — and stay seated."],
+ stop:"Stop treating burnout like a badge of honor. It is not a receipt for your love; it is a bill your body is paying.",
+ focus:"Thirty days of unearned rest, in small doses, until your nervous system learns the sky doesn't fall. The goal isn't more sleep — it's rest without a permission slip.",
+ offer:"Start The EXHALE and circle <b>Day 2 — Rest.</b> It was written for the woman who thinks she has to earn it. And BLOOM @ Night exists for the exact hour the guilt shows up.",
+ day:2},
+watchtower:{name:'The <em>Watchtower</em>',
+ summary:"Strong by vigilance — the keeper of everyone, carrying an invisible spreadsheet that never closes.",
+ mirror:"You are the strong friend. The emergency contact. The one who remembers the permission slip, the appointment, the birthday, the friend who's quietly unraveling. People call it responsibility — and some of it is. But some of it is <b>fear wearing the clothing of competence:</b> the belief that if you anticipate enough, everyone you love stays safe. You don't rest because somewhere deep down, you believe the watching is what's holding it all together.",
+ strength:"Perception. You see people — their needs, their struggles, their unspoken things — with a precision that makes everyone feel held. That gift is rare.",
+ challenge:"Hypervigilance has no off switch. Even in bed, the spreadsheet stays open — everyone's everything, on replay — and your body never gets the memo that the shift ended.",
+ stuck:"You've confused vigilance with love. But you were given stewardship of your own life, not dominion over everyone else's — and carrying what isn't yours is why your shoulders never come down.",
+ actions:["Make the two lists: what's actually mine · what was never mine. Read the second one twice.",
+          "Hand one carried thing back this week — a task, a worry, an adult's problem that belongs to that adult.",
+          "Before bed, name three things that stayed standing today without your supervision."],
+ stop:"Stop being the unpaid project manager of other people's lives. They are allowed to drop things. Things are allowed to fall.",
+ focus:"Thirty days of practicing trust in small denominations: delegate one thing, decline one thing, let one thing be imperfect without rescuing it. Watch the world hold.",
+ offer:"Begin The EXHALE — <b>Day 3, Trust,</b> is your day. And the Night Shelf inside BLOOM @ Night has a bin literally labeled “Not Mine.” It was built for you.",
+ day:3},
+fortress:{name:'The <em>Fortress</em>',
+ summary:"Strong by never needing — fluent at giving, allergic to receiving.",
+ mirror:"Someone says “you look beautiful today” and before it even lands you've said <b>“oh, this old thing.”</b> Someone offers help and you say “I've got it” before they finish the sentence. You receive responsibility instantly — requests, obligations, other people's needs. But delight? Help? A rest you didn't earn? You deflect it like it's coming in too fast. That's not humility. That's years of practicing non-receipt, built in a season when needing anyone felt unsafe.",
+ strength:"Self-possession. You built a woman who can stand alone, and that solidity is why people feel safe leaning on you. You did that with your own hands.",
+ challenge:"The walls that kept danger out now keep nourishment out too. A candle that is never relit cannot keep sharing its flame — and yours has been asked to burn alone for years.",
+ stuck:"Somewhere you learned that needing help made you a burden, so you became the woman who never asks. But self-sufficiency past a certain point isn't strength — it's isolation with good posture.",
+ actions:["Accept one thing this week without editing it — the compliment, the seat, the help, the warm tea. Just “thank you.”",
+          "Ask for one small thing you could technically do yourself. Let someone love you in the currency of action.",
+          "Notice the deflection reflex in real time. You don't have to stop it yet — just catch it."],
+ stop:"Stop auditioning for the title of the woman who needs nothing. Nobody is giving out that award, and the entry fee is your softness.",
+ focus:"Thirty days of receiving practice: one accepted kindness a day, logged. You are not learning to be weak. You are learning circulation.",
+ offer:"Start The EXHALE and watch for <b>Day 4 — Receive.</b> It's the day the deflection gets lovingly interrupted. BLOOM @ Night is seven evenings of the same practice.",
+ day:4},
+someday:{name:'The <em>Someday Woman</em>',
+ summary:"Strong by self-postponement — everyone gets today; she gets someday.",
+ mirror:"The good perfume is still in the drawer. The dress is waiting for an occasion. The trip, the business, the photo, the rest — all scheduled for “when life settles down.” You've been negotiating with your own becoming in tiny daily concessions: slightly quieter, slightly smaller, <b>just enough that only you notice you're disappearing.</b> You keep waiting for permission from a committee that does not exist. Sis — your life is not the waiting room for a future event. Your life is the occasion.",
+ strength:"Vision. You can see the life, the woman, the version of everything at its most beautiful. That imagination is the raw material of every garden ever planted.",
+ challenge:"The vision became a destination instead of a practice — and 'someday' quietly became the place where your one life is being stored.",
+ stuck:"Postponement feels responsible, but it's actually fear of taking up space. Every deferred pleasure is a vote for the belief that your turn comes after everyone else's — and that ledger never balances on its own.",
+ actions:["Do one thing this week as the woman you're becoming, not the woman you've been rehearsing — wear it, book it, say it.",
+          "One act of beauty nobody will see: the good plate, the silk scarf, music while you cook.",
+          "Take one thing off the someday list and give it a date this month. A real one."],
+ stop:"Stop waiting to be less busy, less tired, or more ready. The committee isn't coming. The permission was always yours.",
+ focus:"Thirty days of small occasions: one daily act of beauty, one weekly act of visibility. You're not building a new life — you're moving into the one you already own.",
+ offer:"Begin The EXHALE — <b>Days 5 and 6, Beauty and Bloom,</b> will read like they were written from your diary. Because they nearly were. And BLOOM @ Night makes the evenings themselves the occasion.",
+ day:5}
+};
+const ORDER=["autopilot","earner","watchtower","fortress","someday"];
+
+/* ============ QUESTIONS (8 · max 4 options · rotated coverage) ============ */
+const Q=[
+ {t:"It's 9pm. Everyone's fed, settled, fine. You…",o:[
+  ["Keep moving — there's always one more thing, and stopping feels wrong","earner"],
+  ["Scroll or zone out — technically resting, but not really there","autopilot"],
+  ["Run tomorrow's list — yours, the kids', your mother's, your coworker's","watchtower"],
+  ["Think about the bath, the candle, the journal… and don't","someday"]]},
+ {t:"Someone says, “You're so strong. I don't know how you do it.” Honestly, it lands as…",o:[
+  ["Pressure — the compliment that quietly adds more to carry","earner"],
+  ["Proof — being the strong one is how I stay needed","watchtower"],
+  ["Distance — they have no idea, and I'd never tell them","fortress"],
+  ["Static — I barely registered it. I was already onto the next thing","autopilot"]]},
+ {t:"Someone offers real help — dishes, a ride, taking something off your plate. Your reflex:",o:[
+  ["“I've got it” — before they even finish the sentence","fortress"],
+  ["Accept it, then supervise it, then basically redo it","watchtower"],
+  ["Deflect it toward someone who “needs it more”","someday"],
+  ["Say yes, but feel like I'm falling behind on my own job","earner"]]},
+ {t:"A free Saturday appears. Nothing scheduled. Your first feeling:",o:[
+  ["Guilt — I start filling it with what I'm behind on","earner"],
+  ["Scanning — I check what everyone else might need first","watchtower"],
+  ["Blankness — I honestly don't know what I'd do with it","autopilot"],
+  ["A flicker of the thing I've been postponing… then “someday” wins","someday"]]},
+ {t:"Be honest — sleep versus rest:",o:[
+  ["I sleep, but I wake up like I never left the office in my head","autopilot"],
+  ["I can't get to bed at a decent hour — there's always more to finish","earner"],
+  ["I lie down and the spreadsheet opens: everyone's everything, on replay","watchtower"],
+  ["I could rest if someone made me — I can't seem to give it to myself","fortress"]]},
+ {t:"The last time you did something purely for your own delight was…",o:[
+  ["…I'm still thinking. It's been scheduled for “after” for years","someday"],
+  ["Delight feels like something I haven't earned yet","earner"],
+  ["I do things that look like delight, but I'm not really in them","autopilot"],
+  ["Someone else arranged it — I'd never have allowed it for myself","fortress"]]},
+ {t:"When you imagine actually putting the cape down for a season, the loudest fear says:",o:[
+  ["“Everything I hold together will fall”","watchtower"],
+  ["“If I'm not producing, who even am I?”","earner"],
+  ["“Needing anything makes me a burden”","fortress"],
+  ["“I've waited this long — my turn can wait a little longer”","someday"]]},
+ {t:"Finish the sentence: “I'll finally take care of myself when…”",o:[
+  ["“…everyone I love is okay.” (They're grown, sis.)","watchtower"],
+  ["“…life settles down.” (It won't. It doesn't need to.)","someday"],
+  ["“…someone insists.” (You're the someone now.)","fortress"],
+  ["I stopped finishing that sentence a long time ago. I just keep going.","autopilot"]]}
+];
+
+/* ============ ENGINE ============ */
+let i=0, winner="autopilot";
+const score={autopilot:0,earner:0,watchtower:0,fortress:0,someday:0};
+const history=[];
+
+function go(id){document.querySelectorAll(".screen").forEach(s=>s.classList.remove("on"));
+  document.getElementById(id).classList.add("on");window.scrollTo({top:0});
+  if(id==="s-q")render();}
+
+function render(){
+  if(document.activeElement) document.activeElement.blur();
+  const q=Q[i];
+  document.getElementById("bar").style.width=(i/Q.length*100)+"%";
+  document.getElementById("qnum").textContent="Question "+(i+1)+" of "+Q.length;
+  document.getElementById("qtext").textContent=q.t;
+  document.getElementById("backbtn").style.visibility = i>0 ? "visible":"hidden";
+  const box=document.getElementById("opts");box.innerHTML="";
+  [...q.o].sort(()=>Math.random()-.5).forEach(([txt,key])=>{
+    const b=document.createElement("button");b.className="opt";b.type="button";b.textContent=txt;
+    b.onclick=()=>{
+      if(box.classList.contains("locked"))return;
+      box.classList.add("locked");
+      b.blur();b.classList.add("sel");
+      [...box.children].forEach(x=>{if(x!==b)x.classList.add("dim");});
+      score[key]++;history.push(key);track('question_answered',{q:i+1});
+      setTimeout(()=>{ i++; i<Q.length?render():finish(); },260);
+    };
+    box.appendChild(b);});
+}
+function goBack(){ if(i===0)return; i--; const k=history.pop(); if(k)score[k]--; render(); }
+
+function finish(){
+  document.getElementById("bar").style.width="100%";
+  winner=ORDER.reduce((best,k)=>score[k]>score[best]?k:best,ORDER[0]);
+  document.getElementById("farchetype").value=winner;
+  document.getElementById("gname").innerHTML=P[winner].name;
+  document.getElementById("gline").textContent=P[winner].summary;
+  track('quiz_completed',{persona:winner});
+  go("s-gate");
+}
+
+/* ============ EMAIL CAPTURE (MailerLite) ============ */
+const ML_FORM_ACTION = "https://assets.mailerlite.com/jsonp/2458368/forms/193185614457210756/subscribe";
+
+function submitGate(e){
+  e.preventDefault();
+  const email=document.getElementById("femail").value.trim();
+  const ok=/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email);
+  document.getElementById("err").style.display = ok?"none":"block";
+  if(!ok) return false;
+  try{
+    if(ML_FORM_ACTION.startsWith("http")){
+      const fd=new FormData();
+      fd.append("fields[name]",document.getElementById("fname").value||"");
+      fd.append("fields[email]",email);
+      fd.append("fields[archetype]",winner);
+      fd.append("ml-submit","1");
+      fetch(ML_FORM_ACTION,{method:"POST",body:fd,mode:"no-cors"});
+    }
+  }catch(err){console.error("MailerLite submit failed",err);}
+  track('email_submitted',{persona:winner});
+  revealResult();
+  return false;
+}
+
+function revealResult(){
+  const r=P[winner];
+  document.getElementById("rname").innerHTML=r.name;
+  document.getElementById("rsummary").textContent=r.summary;
+  document.getElementById("rmirror").innerHTML=r.mirror;
+  document.getElementById("rstrength").textContent=r.strength;
+  document.getElementById("rchallenge").textContent=r.challenge;
+  document.getElementById("rstuck").textContent=r.stuck;
+  const ul=document.getElementById("ractions");ul.innerHTML="";
+  r.actions.forEach(a=>{const li=document.createElement("li");li.textContent=a;ul.appendChild(li);});
+  document.getElementById("rstop").textContent=r.stop;
+  document.getElementById("rfocus").textContent=r.focus;
+  document.getElementById("roffer").innerHTML=r.offer;
+  track('result_viewed',{persona:winner});
+  go("s-result");
+}
+
+/* PREVIEW MODE: ?result=autopilot|earner|watchtower|fortress|someday */
+window.addEventListener("DOMContentLoaded",()=>{
+  const p=new URLSearchParams(location.search).get("result");
+  if(p&&P[p]){winner=p;revealResult();}
+});
+</script>
+</body>
+</html>
