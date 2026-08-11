@@ -52,6 +52,7 @@
        color:var(--body);border-radius:8px;padding:16px 18px;margin:12px 0;font-family:'Jost';
        font-weight:300;font-size:16px;line-height:1.5;cursor:pointer;transition:border-color .2s,color .2s;min-height:44px}
 .opt:focus-visible{border-color:var(--rose);color:var(--cream);outline:none}
+  .opt.sel{background:var(--berry);border-color:var(--berry);color:#fff}
 @media (hover:hover){ .opt:hover{border-color:var(--rose);color:var(--cream)} }
   .back{background:none;border:none;color:var(--faint);font-family:'Jost';font-size:12px;
         letter-spacing:.2em;text-transform:uppercase;cursor:pointer;margin-top:18px;padding:10px 0}
@@ -301,10 +302,33 @@ function render(){
   document.getElementById("qtext").textContent=q.t;
   document.getElementById("backbtn").style.visibility = i>0 ? "visible":"hidden";
   const box=document.getElementById("opts");box.innerHTML="";
+  let locked=false;
   [...q.o].sort(()=>Math.random()-.5).forEach(([txt,key])=>{
     const b=document.createElement("button");b.className="opt";b.type="button";b.textContent=txt;
-    b.onclick=()=>{score[key]++;history.push(key);track('question_answered',{q:i+1});
-      i++; i<Q.length?render():finish();};
+    b.onclick=()=>{
+      if(locked) return; locked=true;
+      b.classList.add("sel"); b.blur();
+      score[key]++; history.push(key); track('question_answered',{q:i+1});
+      setTimeout(()=>{ i++; i<Q.length?render():finish(); }, 320);
+    };
+    box.appendChild(b);});
+}
+function goBack(){ if(i===0)return; i--; const k=history.pop(); if(k)score[k]--; render(); }
+
+function finish(){
+  document.getElementById("bar").style.width="100%";
+  const chances={}; ORDER.forEach(k=>chances[k]=0);
+  Q.forEach(q=>q.o.forEach(([,k])=>{ if(chances[k]!==undefined) chances[k]++; }));
+  const rate=k=>chances[k]?score[k]/chances[k]:0;
+  const max=Math.max(...ORDER.map(rate));
+  const tied=ORDER.filter(k=>rate(k)===max);
+  winner = tied.length===1 ? tied[0] : ([...history].reverse().find(k=>tied.includes(k)) || tied[0]);
+  document.getElementById("farchetype").value=winner;
+  document.getElementById("gname").innerHTML=P[winner].name;
+  document.getElementById("gline").textContent=P[winner].summary;
+  track('quiz_completed',{persona:winner});
+  go("s-gate");
+}
     box.appendChild(b);});
 }
 function goBack(){ if(i===0)return; i--; const k=history.pop(); if(k)score[k]--; render(); }
