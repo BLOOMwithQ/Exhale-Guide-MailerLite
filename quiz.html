@@ -51,9 +51,9 @@
   .opt{display:block;width:100%;text-align:left;background:transparent;border:1px solid var(--hair);
        color:var(--body);border-radius:8px;padding:16px 18px;margin:12px 0;font-family:'Jost';
        font-weight:300;font-size:16px;line-height:1.5;cursor:pointer;transition:border-color .2s,color .2s;min-height:44px}
-.opt:focus-visible{border-color:var(--rose);color:var(--cream);outline:none}
+  .opt:focus-visible{border-color:var(--rose);color:var(--cream);outline:none}
   .opt.sel{background:var(--berry);border-color:var(--berry);color:#fff}
-@media (hover:hover){ .opt:hover{border-color:var(--rose);color:var(--cream)} }
+  @media (hover:hover){ .opt:hover{border-color:var(--rose);color:var(--cream)} }
   .back{background:none;border:none;color:var(--faint);font-family:'Jost';font-size:12px;
         letter-spacing:.2em;text-transform:uppercase;cursor:pointer;margin-top:18px;padding:10px 0}
 
@@ -149,8 +149,6 @@
 
     <a href="https://yourexhale.bloomwithquadia.com" style="text-decoration:none" onclick="track('cta_clicked',{cta:'exhale'})">
       <button class="btn">Begin the Exhale, free →</button></a>
-    <a href="https://bloom-rose-noir.netlify.app/" style="text-decoration:none" onclick="track('cta_clicked',{cta:'night'})">
-      <button class="btn ghost">Tonight's sanctuary · BLOOM @ Night</button></a>
     <p class="fine">Free 7-day guided reflection. No card, no spam.</p>
   </section>
 
@@ -329,21 +327,6 @@ function finish(){
   track('quiz_completed',{persona:winner});
   go("s-gate");
 }
-    box.appendChild(b);});
-}
-function goBack(){ if(i===0)return; i--; const k=history.pop(); if(k)score[k]--; render(); }
-
-function finish(){
-  document.getElementById("bar").style.width="100%";
-const max=Math.max(...ORDER.map(k=>score[k]));
-const tied=ORDER.filter(k=>score[k]===max);
-winner=tied.length===1?tied[0]:[...history].reverse().find(k=>tied.includes(k))||tied[0];
-  document.getElementById("farchetype").value=winner;
-  document.getElementById("gname").innerHTML=P[winner].name;
-  document.getElementById("gline").textContent=P[winner].summary;
-  track('quiz_completed',{persona:winner});
-  go("s-gate");
-}
 
 /* ============ EMAIL CAPTURE (MailerLite) ============ */
 const ML_FORM_ACTION = "https://assets.mailerlite.com/jsonp/2458368/forms/193185614457210756/subscribe";
@@ -388,7 +371,9 @@ function revealResult(){
 
 /* PREVIEW MODE: ?result=autopilot|earner|watchtower|fortress|someday */
 window.addEventListener("DOMContentLoaded",()=>{
-  const p=new URLSearchParams(location.search).get("result");
+  const alias={keeper:"watchtower",deflector:"fortress",postponer:"someday"};
+  let p=new URLSearchParams(location.search).get("result");
+  if(p) p=alias[p]||p;
   if(p&&P[p]){winner=p;revealResult();}
 });
 </script>
