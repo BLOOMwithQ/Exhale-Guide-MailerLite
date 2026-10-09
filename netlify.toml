@@ -1,0 +1,23 @@
+# The old v1 EXHALE page is retired. The real app lives at https://bloomwithquadia.com/exhale.
+# Welcome emails already sent point at this site's root, so the root must keep working: it redirects.
+# The quiz (/quiz.html) is still served from this site and is NOT redirected.
+[build]
+  publish = "."
+
+[[redirects]]
+  from = "/"
+  to = "https://bloomwithquadia.com/exhale"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/index.html"
+  to = "https://bloomwithquadia.com/exhale"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/the-exhale-audio.html"
+  to = "https://bloomwithquadia.com/exhale"
+  status = 301
+  force = true
