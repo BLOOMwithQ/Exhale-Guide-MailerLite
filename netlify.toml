@@ -21,3 +21,16 @@
   to = "https://bloomwithquadia.com/exhale"
   status = 301
   force = true
+
+# The quiz moved to the main site. Old links, QR codes and the Carrd button keep working.
+[[redirects]]
+  from = "/quiz.html"
+  to = "https://bloomwithquadia.com/quiz"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/quiz"
+  to = "https://bloomwithquadia.com/quiz"
+  status = 301
+  force = true
